@@ -60,12 +60,34 @@ export default function CinematicReveal({
       ctx.drawImage(img, dx, dy, dw, dh)
     }
 
+    // Shrinks any line whose natural width would exceed ~92% of the
+    // viewport, so long headlines never clip on narrower/tablet widths.
+    // The "natural" size is computed from the same clamp(2rem, 7vw, 6rem)
+    // formula the headline is styled with, rather than read back off the
+    // element itself — reading it back would just return whatever px value
+    // a previous fitLines() call left behind, so a line shrunk at a narrow
+    // width could never grow back on resize.
+    const fitLines = () => {
+      const maxWidth = window.innerWidth * 0.92
+      const natural = Math.min(96, Math.max(32, window.innerWidth * 0.07))
+      lineRefs.current.forEach((el) => {
+        if (!el) return
+        el.style.fontSize = `${natural}px`
+        const width = el.scrollWidth
+        if (width > maxWidth) {
+          const scale = maxWidth / width
+          el.style.fontSize = `${natural * scale}px`
+        }
+      })
+    }
+
     const resize = () => {
       const dpr = Math.min(window.devicePixelRatio || 1, 2)
       canvas.width = window.innerWidth * dpr
       canvas.height = window.innerHeight * dpr
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
       draw(frameRef.current)
+      fitLines()
     }
 
     let ticking = false
@@ -101,6 +123,9 @@ export default function CinematicReveal({
 
     if (images[0]) images[0].onload = () => draw(0)
     resize()
+    // Run again after fonts/layout settle, since scrollWidth on first paint
+    // can be measured before web fonts finish swapping in.
+    requestAnimationFrame(fitLines)
     onScroll()
     window.addEventListener("scroll", onScroll, { passive: true })
     window.addEventListener("resize", resize)
@@ -128,34 +153,38 @@ export default function CinematicReveal({
           ref={canvasRef}
           style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
         />
-        {lines.map((l, i) => (
-          <h1
-            key={i}
-            ref={(el) => {
-              lineRefs.current[i] = el
-            }}
-            style={{
-              position: "absolute",
-              left: "50%",
-              top: "50%",
-              transform: "translate(-50%, -50%)",
-              opacity: 0,
-              fontWeight: 900,
-              fontSize: "clamp(2rem, 7vw, 6rem)",
-              letterSpacing: "-0.02em",
-              textAlign: "center",
-              whiteSpace: "nowrap",
-              color: accentLast && i === lines.length - 1 ? "#8b5cf6" : "#f4f6fb",
-              textShadow:
-                accentLast && i === lines.length - 1
-                  ? "0 0 60px rgba(139,92,246,0.5)"
+        {lines.map((l, i) => {
+          const isAccent = accentLast && i === lines.length - 1
+          return (
+            <h1
+              key={i}
+              ref={(el) => {
+                lineRefs.current[i] = el
+              }}
+              style={{
+                position: "absolute",
+                left: "50%",
+                top: "50%",
+                transform: "translate(-50%, -50%)",
+                opacity: 0,
+                fontWeight: 900,
+                fontSize: "clamp(2rem, 7vw, 6rem)",
+                letterSpacing: "-0.02em",
+                textAlign: "center",
+                whiteSpace: "nowrap",
+                color: isAccent ? "#8b5cf6" : "#f4f6fb",
+                textShadow: isAccent
+                  ? // dark outline for contrast against bright footage,
+                    // layered under the original violet glow
+                    "-1px -1px 0 rgba(0,0,0,0.65), 1px -1px 0 rgba(0,0,0,0.65), -1px 1px 0 rgba(0,0,0,0.65), 1px 1px 0 rgba(0,0,0,0.65), 0 4px 24px rgba(0,0,0,0.55), 0 0 60px rgba(139,92,246,0.5)"
                   : "0 0 40px rgba(0,0,0,0.5)",
-              pointerEvents: "none",
-            }}
-          >
-            {l.text}
-          </h1>
-        ))}
+                pointerEvents: "none",
+              }}
+            >
+              {l.text}
+            </h1>
+          )
+        })}
       </div>
     </section>
   )
