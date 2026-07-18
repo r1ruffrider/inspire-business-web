@@ -14,10 +14,10 @@ export default function ContactFooter() {
           Certification, or partnership opportunities.
         </p>
         <a
-          href="mailto:hello@inspirebusinessgroup.com"
+          href="mailto:info@inspirebusinesstechnology.com"
           className="inline-flex items-center justify-center rounded-md px-8 py-4 text-sm font-semibold bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
         >
-          hello@inspirebusinessgroup.com
+          info@inspirebusinesstechnology.com
         </a>
         <div className="mt-20 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-muted-foreground">
           <span>
