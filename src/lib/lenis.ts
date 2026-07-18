@@ -10,6 +10,20 @@ export function initLenis() {
     requestAnimationFrame(raf)
   }
   requestAnimationFrame(raf)
+
+  // Dragging the native scrollbar bypasses Lenis's internal target tracking,
+  // so it snaps back to a stale position. Re-sync when the browser (not
+  // Lenis) drove the scroll. See darkroomengineering/lenis#168, #107.
+  window.addEventListener(
+    "scroll",
+    () => {
+      if (!lenis.isScrolling) {
+        lenis.scrollTo(window.scrollY, { immediate: true })
+      }
+    },
+    { passive: true },
+  )
+
   lenisInstance = lenis
   return lenis
 }
