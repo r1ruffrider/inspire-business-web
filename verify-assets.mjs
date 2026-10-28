@@ -8,10 +8,11 @@
  *      from the running dev server (catches silent 404s mid-scrub).
  *
  * Usage:
- *   node verify-assets.mjs
+ *   node verify-assets.mjs                                   (dev server on 5183)
+ *   BASE_URL=https://www.inspirebusinesstechnology.com node verify-assets.mjs
  *
- * Run this from the project's `site/` directory (or edit ROOT below),
- * with `npm run dev` already running at BASE_URL.
+ * Run this from the project's `site/` directory (or edit ROOT below).
+ * For a local check, have `npm run dev` already running at BASE_URL.
  */
 
 import { readdir } from "node:fs/promises";
@@ -19,7 +20,7 @@ import path from "node:path";
 
 // ---- config: adjust to match your project ----------------------------
 const ROOT = process.cwd(); // expects to be run from site/
-const BASE_URL = "http://localhost:5183";
+const BASE_URL = (process.env.BASE_URL || "http://localhost:5183").replace(/\/+$/, "");
 
 const FRAME_SETS = [
   { name: "morph", dir: "public/frames/morph", expectedCount: 150 },
@@ -42,7 +43,7 @@ async function listFrameFiles(dir) {
     return entries
       .filter((f) => /\.(jpg|jpeg|png|webp)$/i.test(f))
       .sort();
-  } catch (err) {
+  } catch {
     return null; // directory missing
   }
 }
