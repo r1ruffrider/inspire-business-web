@@ -86,7 +86,10 @@ export async function sendServiceRequest(
       body: JSON.stringify(wire),
       signal: controller.signal,
       cache: "no-store",
-      credentials: "omit",
+      // Same-origin only: cookies go to our own site and nowhere else. The API ignores cookies,
+      // but a protected Vercel preview needs its login cookie on this request or Vercel answers
+      // 401 before the function runs. (Production has no such gate, so nothing is sent there.)
+      credentials: "same-origin",
     })
 
     let body: unknown = null
