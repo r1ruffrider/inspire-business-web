@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict'
 import { describe, it } from 'node:test'
-import { validateServiceRequest } from '../../shared/serviceRequest.ts'
-import type { ServiceRequest } from '../../shared/serviceRequest.ts'
+import { validateServiceRequest } from '../../shared/serviceRequest.js'
+import type { ServiceRequest } from '../../shared/serviceRequest.js'
 import {
   buildSubject,
   composeEmail,
@@ -11,8 +11,8 @@ import {
   PRIVACY_NOTE_VERSION,
   sanitizeForSubject,
   UNTRUSTED_NOTICE,
-} from './email.ts'
-import { CRLF, FIXED_NOW, FROM, REAL_INBOX, u, validBody } from './test-helpers.ts'
+} from './email.js'
+import { CRLF, FIXED_NOW, FROM, REAL_INBOX, u, validBody } from './test-helpers.js'
 
 function value(over: Record<string, unknown> = {}): ServiceRequest {
   const r = validateServiceRequest(validBody(over))

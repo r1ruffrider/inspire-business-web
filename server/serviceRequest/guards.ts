@@ -6,7 +6,7 @@
  */
 import { createHash, randomBytes } from 'node:crypto'
 import { isIP } from 'node:net'
-import type { Config } from './config.ts'
+import type { Config } from './config.js'
 
 // ---------------------------------------------------------------------------
 // Origin (T7)

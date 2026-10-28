@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict'
 import { describe, it } from 'node:test'
-import { createLogger, errorNameOf } from './log.ts'
+import { createLogger, errorNameOf } from './log.js'
 
 function capture(): { lines: string[]; log: ReturnType<typeof createLogger> } {
   const lines: string[] = []

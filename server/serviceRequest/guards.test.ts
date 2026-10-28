@@ -1,9 +1,9 @@
 import assert from 'node:assert/strict'
 import { describe, it } from 'node:test'
-import { readConfig } from './config.ts'
-import type { Config } from './config.ts'
-import { checkOrigin, clientKey, createRateLimiter, normalizeIp, readJsonBody } from './guards.ts'
-import { localEnv, previewEnv, prodEnv } from './test-helpers.ts'
+import { readConfig } from './config.js'
+import type { Config } from './config.js'
+import { checkOrigin, clientKey, createRateLimiter, normalizeIp, readJsonBody } from './guards.js'
+import { localEnv, previewEnv, prodEnv } from './test-helpers.js'
 
 function cfg(env: Parameters<typeof readConfig>[0]): Config {
   const r = readConfig(env)

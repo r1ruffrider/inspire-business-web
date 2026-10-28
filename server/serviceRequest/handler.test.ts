@@ -4,9 +4,9 @@
  */
 import assert from 'node:assert/strict'
 import { describe, it } from 'node:test'
-import { handleServiceRequest } from './handler.ts'
-import { createRateLimiter } from './guards.ts'
-import { isValidAsciiEmail } from '../../shared/serviceRequest.ts'
+import { handleServiceRequest } from './handler.js'
+import { createRateLimiter } from './guards.js'
+import { isValidAsciiEmail } from '../../shared/serviceRequest.js'
 import {
   CRLF,
   INJECTION_PAYLOADS,
@@ -21,8 +21,8 @@ import {
   resendPayload,
   u,
   validBody,
-} from './test-helpers.ts'
-import type { FakeNetwork, Harness } from './test-helpers.ts'
+} from './test-helpers.js'
+import type { FakeNetwork, Harness } from './test-helpers.js'
 
 // ---------------------------------------------------------------------------
 // Invariants every response must satisfy

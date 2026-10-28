@@ -12,8 +12,8 @@ import {
   validateField,
   validateServiceRequest,
   WIRE_KEYS,
-} from './serviceRequest.ts'
-import type { FieldError, ServiceRequest } from './serviceRequest.ts'
+} from './serviceRequest.js'
+import type { FieldError, ServiceRequest } from './serviceRequest.js'
 
 // Invisible and separator characters are built from code points: none is pasted into this file.
 const u = (...codes: number[]): string => String.fromCodePoint(...codes)

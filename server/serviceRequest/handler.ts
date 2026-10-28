@@ -15,18 +15,18 @@ import {
   isIdempotencyKey,
   MAX_BODY_BYTES,
   validateServiceRequest,
-} from '../../shared/serviceRequest.ts'
-import type { ApiFailure, ApiFieldError, ApiSuccess } from '../../shared/serviceRequest.ts'
-import { readConfig } from './config.ts'
-import type { Config, ConfigResult, Env } from './config.ts'
-import { composeEmail } from './email.ts'
-import { checkOrigin, clientKey, createRateLimiter, readJsonBody } from './guards.ts'
-import type { RateLimiter } from './guards.ts'
-import { consoleSink, createLogger, errorNameOf } from './log.ts'
-import type { LogSink } from './log.ts'
-import { logTransport, MailError, resendTransport } from './mail.ts'
-import type { MailTransport } from './mail.ts'
-import { verifyTurnstile } from './turnstile.ts'
+} from '../../shared/serviceRequest.js'
+import type { ApiFailure, ApiFieldError, ApiSuccess } from '../../shared/serviceRequest.js'
+import { readConfig } from './config.js'
+import type { Config, ConfigResult, Env } from './config.js'
+import { composeEmail } from './email.js'
+import { checkOrigin, clientKey, createRateLimiter, readJsonBody } from './guards.js'
+import type { RateLimiter } from './guards.js'
+import { consoleSink, createLogger, errorNameOf } from './log.js'
+import type { LogSink } from './log.js'
+import { logTransport, MailError, resendTransport } from './mail.js'
+import type { MailTransport } from './mail.js'
+import { verifyTurnstile } from './turnstile.js'
 
 export interface HandlerDeps {
   env: Env

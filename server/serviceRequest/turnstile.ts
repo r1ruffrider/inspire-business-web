@@ -11,9 +11,9 @@
  * VERIFY (Valentina/Natalia): response field names (success, hostname, action, error-codes)
  * against Cloudflare's current docs; they could not be confirmed offline.
  */
-import { TURNSTILE_ACTION, TURNSTILE_TOKEN_MAX_LENGTH } from '../../shared/serviceRequest.ts'
-import type { Logger } from './log.ts'
-import { errorNameOf } from './log.ts'
+import { TURNSTILE_ACTION, TURNSTILE_TOKEN_MAX_LENGTH } from '../../shared/serviceRequest.js'
+import type { Logger } from './log.js'
+import { errorNameOf } from './log.js'
 
 export const SITEVERIFY_URL = 'https://challenges.cloudflare.com/turnstile/v0/siteverify'
 export const TURNSTILE_TIMEOUT_MS = 3000

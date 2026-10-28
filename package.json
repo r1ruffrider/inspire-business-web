@@ -8,7 +8,7 @@
     "build": "tsc -b && vite build",
     "lint": "oxlint",
     "preview": "vite preview",
-    "test": "node --test \"shared/**/*.test.ts\" \"server/**/*.test.ts\"",
+    "test": "node --import ./server/scripts/register-ts-js.mjs --test \"shared/**/*.test.ts\" \"server/**/*.test.ts\"",
     "typecheck:server": "tsc -p tsconfig.server.json",
     "check:boundaries": "node server/scripts/check-boundaries.mjs"
   },

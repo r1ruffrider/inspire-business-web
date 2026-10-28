@@ -4,9 +4,9 @@
  * pasted into a source file.
  */
 import { randomUUID } from 'node:crypto'
-import type { Env } from './config.ts'
-import type { HandlerDeps } from './handler.ts'
-import { createRateLimiter } from './guards.ts'
+import type { Env } from './config.js'
+import type { HandlerDeps } from './handler.js'
+import { createRateLimiter } from './guards.js'
 
 export const PROD_ORIGIN = 'https://www.inspirebusinesstechnology.com'
 export const PROD_HOST = 'www.inspirebusinesstechnology.com'

@@ -25,15 +25,15 @@ function run(files: Record<string, string>): { code: number | null; out: string 
 
 describe('boundary check script', () => {
   it('passes on a clean tree', () => {
-    const r = run({ 'src/App.tsx': "import { validateServiceRequest } from '../shared/serviceRequest.ts'\n", 'shared/serviceRequest.ts': 'export const a = 1\n' })
+    const r = run({ 'src/App.tsx': "import { validateServiceRequest } from '../shared/serviceRequest.js'\n", 'shared/serviceRequest.ts': 'export const a = 1\n' })
     assert.equal(r.code, 0, r.out)
   })
   for (const [label, text] of [
-    ['static import of server', "import { h } from '../server/serviceRequest/handler.ts'\n"],
-    ['import of api', "import h from '../api/service-request.ts'\n"],
-    ['dynamic import of server', "const m = await import('../../server/x.ts')\n"],
-    ['re-export from server', "export * from '../server/x.ts'\n"],
-    ['bare side-effect import', "import '../server/x.ts'\n"],
+    ['static import of server', "import { h } from '../server/serviceRequest/handler.js'\n"],
+    ['import of api', "import h from '../api/service-request.js'\n"],
+    ['dynamic import of server', "const m = await import('../../server/x.js')\n"],
+    ['re-export from server', "export * from '../server/x.js'\n"],
+    ['bare side-effect import', "import '../server/x.js'\n"],
     ['node builtin in src', "import { createHash } from 'node:crypto'\n"],
     ['process.env in src', 'const k = process.env.SECRET\n'],
   ] as const) {
@@ -46,8 +46,17 @@ describe('boundary check script', () => {
     assert.equal(run({ 'shared/a.ts': 'export const x = process.env.A\n' }).code, 1)
     assert.equal(run({ 'shared/a.ts': 'export const x = import.meta.env.A\n' }).code, 1)
     assert.equal(run({ 'shared/a.ts': "import { x } from 'node:fs'\n" }).code, 1)
-    assert.equal(run({ 'shared/a.ts': "import { x } from '../server/y.ts'\n" }).code, 1)
+    assert.equal(run({ 'shared/a.ts': "import { x } from '../server/y.js'\n" }).code, 1)
     assert.equal(run({ 'shared/a.ts': "import { x } from 'zod'\n" }).code, 1)
+  })
+  it('function code must use .js relative specifiers (Vercel runs compiled ESM)', () => {
+    assert.equal(run({ 'api/a.ts': "import { h } from '../server/h.js'\n", 'server/h.ts': 'export const h = 1\n' }).code, 0)
+    assert.equal(run({ 'api/a.ts': "import { h } from '../server/h.ts'\n" }).code, 1)
+    assert.equal(run({ 'api/a.ts': "import { h } from '../server/h'\n" }).code, 1)
+    assert.equal(run({ 'server/a.ts': "export * from './h.ts'\n" }).code, 1)
+    assert.equal(run({ 'server/a.ts': "const m = await import('./h.ts')\n" }).code, 1)
+    assert.equal(run({ 'shared/a.ts': "import type { T } from './t.ts'\n" }).code, 1)
+    assert.equal(run({ 'shared/a.ts': "import type { T } from './t.js'\n" }).code, 0)
   })
   it('N8: only VITE_TURNSTILE_SITE_KEY and VITE_SHOW_TODOS are allowed, in src/ and .env.example', () => {
     assert.equal(run({ 'src/a.ts': 'const k = import.meta.env.VITE_TURNSTILE_SITE_KEY + import.meta.env.VITE_SHOW_TODOS\n' }).code, 0)

@@ -3,9 +3,11 @@
 //
 // VERIFY (Renata, P0 spike): (a) Vercel's Node runtime accepts `export default { fetch }` (Web
 // handler) for api/*.ts; fallback is a (req, res) adapter that builds a Request and pipes the
-// Response, handler core unchanged. (b) Vercel's TypeScript compile follows relative `.ts`
-// specifiers into server/ and shared/ under "type": "module"; fallback is `.js` specifiers.
-import { handleServiceRequest } from '../server/serviceRequest/handler.ts'
+// Response, handler core unchanged.
+// Relative imports in api/, server/ and shared/ end in `.js` and point at the `.ts` source (the
+// standard TypeScript-ESM convention). Vercel compiles .ts to .js without rewriting specifiers, so a
+// `.ts` specifier crashes the function with ERR_MODULE_NOT_FOUND. `npm run check:boundaries` enforces it.
+import { handleServiceRequest } from '../server/serviceRequest/handler.js'
 
 export default {
   fetch(request: Request): Promise<Response> {

@@ -1,10 +1,10 @@
 import assert from 'node:assert/strict'
 import { describe, it } from 'node:test'
-import { createLogger } from './log.ts'
-import { SITEVERIFY_URL, verifyTurnstile } from './turnstile.ts'
-import type { TurnstileParams } from './turnstile.ts'
-import { makeFakeNetwork, PROD_HOST } from './test-helpers.ts'
-import type { FakeNetworkOptions } from './test-helpers.ts'
+import { createLogger } from './log.js'
+import { SITEVERIFY_URL, verifyTurnstile } from './turnstile.js'
+import type { TurnstileParams } from './turnstile.js'
+import { makeFakeNetwork, PROD_HOST } from './test-helpers.js'
+import type { FakeNetworkOptions } from './test-helpers.js'
 
 function params(netOpts: FakeNetworkOptions, over: Partial<TurnstileParams> = {}) {
   const net = makeFakeNetwork(netOpts)

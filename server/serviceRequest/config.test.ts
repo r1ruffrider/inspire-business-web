@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict'
 import { describe, it } from 'node:test'
-import { readConfig, TURNSTILE_TEST_SECRETS } from './config.ts'
-import type { Env } from './config.ts'
-import { CRLF, FROM, localEnv, prodEnv, previewEnv, REAL_INBOX, u } from './test-helpers.ts'
+import { readConfig, TURNSTILE_TEST_SECRETS } from './config.js'
+import type { Env } from './config.js'
+import { CRLF, FROM, localEnv, prodEnv, previewEnv, REAL_INBOX, u } from './test-helpers.js'
 
 function names(env: Env): { missing: string[]; invalid: string[]; events: string[] } {
   const r = readConfig(env)

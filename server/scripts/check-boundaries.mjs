@@ -67,6 +67,21 @@ for (const file of walk(join(root, 'shared'))) {
   }
 }
 
+// 2b. Function code (api/, server/, shared/) uses the standard TypeScript-ESM convention: every
+//     relative import specifier ends in ".js" (it points at the .ts source). Vercel compiles .ts to
+//     .js without rewriting specifiers, so a ".ts" or extensionless relative import crashes the
+//     function at runtime with ERR_MODULE_NOT_FOUND.
+for (const dir of ['api', 'server', 'shared']) {
+  for (const file of walk(join(root, dir))) {
+    if (!/\.[cm]?ts$/.test(file)) continue
+    if (rel(file) === 'server/scripts/check-boundaries.test.ts') continue // its fixtures contain sample specifiers
+    for (const spec of specifiers(readFileSync(file, 'utf8'))) {
+      if (!(spec.startsWith('./') || spec.startsWith('../'))) continue
+      if (!spec.endsWith('.js')) problems.push(`${rel(file)}: relative import "${spec}" must end in .js`)
+    }
+  }
+}
+
 // 3. Secret-looking strings in src/, shared/, api/, server/, vercel.json, .env.example
 const SECRET_PATTERNS = [
   [/\bre_[A-Za-z0-9_]{16,}/, 'Resend-style key'],

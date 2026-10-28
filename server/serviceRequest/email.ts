@@ -14,9 +14,9 @@ import {
   sanitizeSingleLine,
   SERVICES,
   PRIVACY_NOTE_VERSION,
-} from '../../shared/serviceRequest.ts'
-import type { ServiceRequest } from '../../shared/serviceRequest.ts'
-import type { MailMessage } from './mail.ts'
+} from '../../shared/serviceRequest.js'
+import type { ServiceRequest } from '../../shared/serviceRequest.js'
+import type { MailMessage } from './mail.js'
 
 /** Bumped by whoever changes COPY.md section 4 (the privacy note). Date string. */
 // Single source of truth lives in shared/serviceRequest.ts (the page reads it from there).

@@ -5,7 +5,7 @@
  *
  * Failures carry variable NAMES only, never values.
  */
-import { isValidAsciiEmail } from '../../shared/serviceRequest.ts'
+import { isValidAsciiEmail } from '../../shared/serviceRequest.js'
 
 export type Env = Record<string, string | undefined>
 
