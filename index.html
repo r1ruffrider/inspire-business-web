@@ -3,21 +3,138 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500&display=swap"
       rel="stylesheet"
     />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#05050c" />
+
+    <title>Websites, Logos &amp; Branding | Inspire Business Group</title>
     <meta
       name="description"
-      content="Inspire Business Group LLC — a technology and education venture studio building Forge, Fluyo, and Smart Home Certification."
+      content="Request a website, logo or branding from Inspire Business Group, a technology and education venture studio behind Forge, Fluyo and Smart Home Certification."
     />
-    <title>Inspire Business Group</title>
+    <link rel="canonical" href="https://www.inspirebusinesstechnology.com/" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Inspire Business Group" />
+    <meta property="og:url" content="https://www.inspirebusinesstechnology.com/" />
+    <meta property="og:title" content="Websites, logos and branding for your business" />
+    <meta
+      property="og:description"
+      content="Request a website, logo or business branding from Inspire Business Group, a technology and education venture studio."
+    />
+    <meta property="og:image" content="https://www.inspirebusinesstechnology.com/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="Inspire Business Group: websites, logos and branding for your business."
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Websites, logos and branding for your business" />
+    <meta
+      name="twitter:description"
+      content="Request a website, logo or business branding from Inspire Business Group, a technology and education venture studio."
+    />
+    <meta name="twitter:image" content="https://www.inspirebusinesstechnology.com/og-image.jpg" />
+    <meta
+      name="twitter:image:alt"
+      content="Inspire Business Group: websites, logos and branding for your business."
+    />
+
+    <!-- Keep this URL in sync with the poster in src/App.tsx -->
+    <link rel="preload" as="image" href="/frames/morph/frame_0001.jpg" fetchpriority="high" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "@id": "https://www.inspirebusinesstechnology.com/#organization",
+        "name": "Inspire Business Group",
+        "legalName": "Inspire Business Group LLC",
+        "url": "https://www.inspirebusinesstechnology.com/",
+        "email": "info@inspirebusinesstechnology.com",
+        "description": "Inspire Business Group LLC is a technology and education venture studio that builds platforms built to help people learn, certify and live better, and takes requests for websites, logos and business branding.",
+        "brand": [
+          { "@type": "Brand", "name": "Forge", "description": "AI-powered exam prep for high-stakes certifications, starting with CISSP." },
+          { "@type": "Brand", "name": "Fluyo", "description": "AI-powered language learning that combines adaptive learning, conversational AI, real-world practice and interactive content." },
+          { "@type": "Brand", "name": "Smart Home Certification", "description": "Certification platform that certifies homes by their level of smart-technology integration." }
+        ],
+        "makesOffer": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Website" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Logo" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Business branding" } }
+        ]
+      }
+    </script>
   </head>
   <body>
-    <div id="root"></div>
+    <!--
+      Pre-rendered shell: the core text exists in the raw HTML for crawlers and
+      for visitors without JavaScript. React replaces it on mount (no hydration).
+      Class names match the real first screen so there is no visible swap.
+      No inline style attributes anywhere in this file (CSP).
+    -->
+    <div id="root">
+      <header class="nav">
+        <div class="wrap">
+          <div class="nav__bar">
+            <a class="wordmark" href="/" translate="no" aria-label="Inspire Business Group, back to top">Inspire <span class="text-gradient">Business Group</span></a>
+          </div>
+        </div>
+      </header>
+      <main id="main">
+        <section id="top" class="hero" aria-labelledby="h1">
+          <img
+            class="hero__poster"
+            src="/frames/morph/frame_0001.jpg"
+            width="1600"
+            height="900"
+            alt=""
+            decoding="async"
+            fetchpriority="high"
+          />
+          <div class="hero__layer hero__layer--flow">
+            <div class="hero__scrim"></div>
+            <div class="wrap hero__inner">
+              <div class="hero__copy">
+                <h1 class="h-display" id="h1">Websites, logos and branding for your business.</h1>
+                <p class="lead">
+                  <span translate="no">Inspire Business Group</span> is a technology and education venture studio.
+                  We also build <span translate="no">Forge</span>, <span translate="no">Fluyo</span> and
+                  <span translate="no">Smart Home Certification</span>.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="shell-more wrap" aria-label="Services and contact">
+          <p>Services you can request:</p>
+          <ul>
+            <li>Website</li>
+            <li>Logo</li>
+            <li>Business branding</li>
+          </ul>
+          <p>
+            Email us at <a href="mailto:info@inspirebusinesstechnology.com">info@inspirebusinesstechnology.com</a>.
+          </p>
+          <p>Inspire Business Group also builds Forge, Fluyo and Smart Home Certification.</p>
+        </section>
+      </main>
+    </div>
+    <noscript>
+      <p class="noscript">
+        Inspire Business Group LLC is a technology and education venture studio. You can request a website, a logo
+        or business branding by emailing info@inspirebusinesstechnology.com. We also build Forge, Fluyo and Smart
+        Home Certification. This site uses JavaScript for its request form and page effects.
+      </p>
+    </noscript>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

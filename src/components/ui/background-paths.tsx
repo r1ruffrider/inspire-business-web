@@ -1,149 +1,146 @@
-import { motion } from "framer-motion"
-import { Button } from "@/components/ui/button"
+import { useRef } from "react"
+import { motion, useInView, useReducedMotion } from "framer-motion"
+import { RequestCta, SeeLink } from "@/components/ui/actions"
 
-function FloatingPaths({ position }: { position: number }) {
-  const paths = Array.from({ length: 36 }, (_, i) => ({
+// 36 paths per layer. Durations are stable (no Math.random in render).
+const PATH_COUNT = 36
+
+function pathD(i: number, position: number) {
+  return `M-${380 - i * 5 * position} -${189 + i * 6}C-${
+    380 - i * 5 * position
+  } -${189 + i * 6} -${312 - i * 5 * position} ${216 - i * 6} ${
+    152 - i * 5 * position
+  } ${343 - i * 6}C${616 - i * 5 * position} ${470 - i * 6} ${
+    684 - i * 5 * position
+  } ${875 - i * 6} ${684 - i * 5 * position} ${875 - i * 6}`
+}
+
+function FloatingPaths({ position, animate }: { position: number; animate: boolean }) {
+  const paths = Array.from({ length: PATH_COUNT }, (_, i) => ({
     id: i,
-    d: `M-${380 - i * 5 * position} -${189 + i * 6}C-${
-      380 - i * 5 * position
-    } -${189 + i * 6} -${312 - i * 5 * position} ${216 - i * 6} ${
-      152 - i * 5 * position
-    } ${343 - i * 6}C${616 - i * 5 * position} ${470 - i * 6} ${
-      684 - i * 5 * position
-    } ${875 - i * 6} ${684 - i * 5 * position} ${875 - i * 6}`,
+    d: pathD(i, position),
     width: 0.5 + i * 0.03,
+    // deterministic 20..29 s
+    duration: 20 + ((i * 7 + (position > 0 ? 3 : 5)) % 10),
   }))
 
   return (
     <div className="absolute inset-0 pointer-events-none">
-      <svg
-        className="w-full h-full text-white/80"
-        viewBox="0 0 696 316"
-        fill="none"
-      >
-        <title>Background Paths</title>
-        {paths.map((path) => (
-          <motion.path
-            key={path.id}
-            d={path.d}
-            stroke="currentColor"
-            strokeWidth={path.width}
-            strokeOpacity={0.1 + path.id * 0.03}
-            initial={{ pathLength: 0.3, opacity: 0.6 }}
-            animate={{
-              pathLength: 1,
-              opacity: [0.3, 0.6, 0.3],
-              pathOffset: [0, 1, 0],
-            }}
-            transition={{
-              duration: 20 + Math.random() * 10,
-              repeat: Number.POSITIVE_INFINITY,
-              ease: "linear",
-            }}
-          />
-        ))}
+      <svg className="w-full h-full text-white/80" viewBox="0 0 696 316" fill="none" aria-hidden="true">
+        {paths.map((path) =>
+          animate ? (
+            <motion.path
+              key={path.id}
+              d={path.d}
+              stroke="currentColor"
+              strokeWidth={path.width}
+              strokeOpacity={0.1 + path.id * 0.03}
+              initial={{ pathLength: 0.3, opacity: 0.6 }}
+              animate={{
+                pathLength: 1,
+                opacity: [0.3, 0.6, 0.3],
+                pathOffset: [0, 1, 0],
+              }}
+              transition={{
+                duration: path.duration,
+                repeat: Number.POSITIVE_INFINITY,
+                ease: "linear",
+              }}
+            />
+          ) : (
+            // Frozen: off-screen or reduced motion. Same line art, no loop.
+            <path
+              key={path.id}
+              d={path.d}
+              stroke="currentColor"
+              strokeWidth={path.width}
+              strokeOpacity={(0.1 + path.id * 0.03) * 0.45}
+            />
+          ),
+        )}
       </svg>
     </div>
   )
 }
 
+const ACCENT_WORD = "Architecture"
+
+/**
+ * Mission statement. The line art loops only while on screen and not under
+ * reduced motion (then it is a frozen SVG). The per-letter spring runs once,
+ * and becomes plain text under reduced motion. The one primary action here is
+ * "Request services"; "See what we build" is the quiet secondary.
+ */
 export function BackgroundPaths({
-  title = "Background Paths",
+  title,
   subtitle,
-  ctaLabel = "Discover Excellence",
-  onCtaClick,
 }: {
-  title?: string
+  title: string
   subtitle?: string
-  ctaLabel?: string
-  onCtaClick?: () => void
 }) {
+  const reduced = useReducedMotion()
+  const sectionRef = useRef<HTMLElement>(null)
+  // Start animating a little before the section enters the viewport.
+  const inView = useInView(sectionRef, { margin: "200px 0px 200px 0px" })
+  const animate = !reduced && inView
   const words = title.split(" ")
 
   return (
-    <section
-      id="mission"
-      className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-background"
-    >
+    <section ref={sectionRef} id="mission" className="mission">
       <div className="absolute inset-0">
-        <FloatingPaths position={1} />
-        <FloatingPaths position={-1} />
+        <FloatingPaths position={1} animate={animate} />
+        <FloatingPaths position={-1} animate={animate} />
       </div>
 
-      <div className="relative z-10 container mx-auto px-4 md:px-6 text-center">
-        <div
-          className="absolute inset-0 -z-[1] pointer-events-none"
-          style={{
-            background:
-              "radial-gradient(ellipse 60% 55% at 50% 50%, rgba(2,3,10,0.75) 0%, rgba(2,3,10,0.35) 55%, transparent 80%)",
-          }}
-        />
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true, amount: 0.4 }}
-          transition={{ duration: 1.5 }}
-          className="max-w-4xl mx-auto"
-        >
-          <h2 className="text-4xl sm:text-6xl md:text-7xl font-extrabold mb-6 tracking-tighter">
-            {words.map((word, wordIndex) => (
-              <span key={wordIndex} className="inline-block mr-4 last:mr-0">
-                {word.split("").map((letter, letterIndex) => (
-                  <motion.span
-                    key={`${wordIndex}-${letterIndex}`}
-                    initial={{ y: 60, opacity: 0 }}
-                    whileInView={{ y: 0, opacity: 1 }}
-                    viewport={{ once: true, amount: 0.4 }}
-                    transition={{
-                      delay: wordIndex * 0.1 + letterIndex * 0.03,
-                      type: "spring",
-                      stiffness: 150,
-                      damping: 25,
-                    }}
-                    className="inline-block text-gradient"
-                  >
-                    {letter}
-                  </motion.span>
-                ))}
-              </span>
-            ))}
-          </h2>
-
-          {subtitle && (
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.4 }}
-              transition={{ delay: 0.6, duration: 0.8 }}
-              className="text-muted-foreground text-lg md:text-xl max-w-2xl mx-auto mb-10"
-            >
-              {subtitle}
-            </motion.p>
+      <div className="relative z-10 wrap text-center">
+        <div className="mission__scrim" />
+        <div className="max-w-4xl mx-auto">
+          {reduced ? (
+            <h2 className="mission__h2">
+              {words.map((word, wordIndex) => (
+                <span key={wordIndex}>
+                  {wordIndex > 0 && " "}
+                  <span className={word === ACCENT_WORD ? "accent-w" : undefined}>{word}</span>
+                </span>
+              ))}
+            </h2>
+          ) : (
+            <h2 className="mission__h2" aria-label={title}>
+              {words.map((word, wordIndex) => (
+                <span key={wordIndex} aria-hidden="true" className="inline-block mr-4 last:mr-0">
+                  {word.split("").map((letter, letterIndex) => (
+                    <motion.span
+                      key={`${wordIndex}-${letterIndex}`}
+                      initial={{ y: 60, opacity: 0 }}
+                      whileInView={{ y: 0, opacity: 1 }}
+                      viewport={{ once: true, amount: 0.4 }}
+                      transition={{
+                        delay: wordIndex * 0.06 + letterIndex * 0.015,
+                        type: "spring",
+                        stiffness: 150,
+                        damping: 25,
+                      }}
+                      className={`inline-block${word === ACCENT_WORD ? " accent-w" : ""}`}
+                    >
+                      {letter}
+                    </motion.span>
+                  ))}
+                </span>
+              ))}
+            </h2>
           )}
 
-          <div
-            className="inline-block group relative bg-gradient-to-b from-white/15 to-white/5 p-px rounded-2xl backdrop-blur-lg
-            overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300"
-          >
-            <Button
-              variant="ghost"
-              onClick={onCtaClick}
-              className="rounded-[1.15rem] px-8 py-6 text-lg font-semibold backdrop-blur-md
-              bg-black/60 hover:bg-black/80 text-white transition-all duration-300
-              group-hover:-translate-y-0.5 border border-white/10 hover:shadow-md"
-            >
-              <span className="opacity-90 group-hover:opacity-100 transition-opacity">
-                {ctaLabel}
-              </span>
-              <span
-                className="ml-3 opacity-70 group-hover:opacity-100 group-hover:translate-x-1.5
-                transition-all duration-300"
-              >
-                →
-              </span>
-            </Button>
+          {subtitle && (
+            <p className="text-muted-foreground text-lg md:text-xl max-w-2xl mx-auto mb-10">
+              {subtitle}
+            </p>
+          )}
+
+          <div className="mission__actions">
+            <RequestCta />
+            <SeeLink />
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   )

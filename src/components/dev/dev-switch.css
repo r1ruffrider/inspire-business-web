@@ -1,0 +1,35 @@
+/* Development-only: imported by DevSwitch.tsx, which production builds drop. */
+/* dev-only worst-case switch (never in production builds); collapsed so it never covers the page */
+.dev-switch {
+  position: fixed;
+  z-index: 200;
+  left: 8px;
+  bottom: 8px;
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
+  background: rgba(11, 11, 24, 0.94);
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 12px;
+}
+.dev-switch summary {
+  cursor: pointer;
+  padding: 4px 8px;
+  color: var(--muted-foreground);
+}
+.dev-switch div {
+  display: flex;
+  gap: 6px;
+  padding: 4px 8px 8px;
+}
+.dev-switch a {
+  color: #fff;
+  text-decoration: none;
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--secondary);
+}
+.dev-switch a[aria-current="true"] {
+  border-color: var(--primary);
+}
