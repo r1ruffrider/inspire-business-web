@@ -26,3 +26,7 @@ dist-ssr
 .env
 .env.local
 .env.*.local
+# Added for the Request services backend (THREAT-MODEL T15)
+.vercel
+.env.*
+!.env.example
