@@ -1,6 +1,5 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "regions": ["dxb1"],
   "functions": {
     "api/service-request.ts": {
       "maxDuration": 10
