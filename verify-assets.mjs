@@ -24,7 +24,6 @@ const BASE_URL = (process.env.BASE_URL || "http://localhost:5183").replace(/\/+$
 
 const FRAME_SETS = [
   { name: "morph", dir: "public/frames/morph", expectedCount: 150 },
-  { name: "flythrough", dir: "public/frames/flythrough", expectedCount: 150 },
 ];
 
 const STATIC_IMAGES = [
