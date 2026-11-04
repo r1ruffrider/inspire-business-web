@@ -1,11 +1,11 @@
 import { PRIVACY_NOTE_VERSION } from "@shared/serviceRequest"
-import Todo, { SHOW_TODOS } from "@/components/Todo"
 
 export const PRIVACY_NOTE_ID = "privacy-note"
 
 /**
- * Privacy note body. Text: COPY.md section 4. Facts nobody has supplied yet are
- * <Todo> chips (visible only with VITE_SHOW_TODOS=1) and are never invented.
+ * Privacy note body. Text: COPY.md section 4, kept word for word (legal copy is
+ * an owner decision). Facts nobody has supplied yet are listed in OWNER-TODO.md
+ * at the repo root and are never invented on the page.
  * Phase 2 can reuse <PrivacyNoteBody/> inside the form's consent disclosure.
  */
 export function PrivacyNoteBody() {
@@ -27,8 +27,7 @@ export function PrivacyNoteBody() {
         and Cloudflare may process your IP address and browser signals. Our host, Vercel, sees IP
         addresses in its logs and in its Firewall counters. Our server keeps only a salted hash of
         your IP address, in memory, for about 10 minutes, or until the server restarts, to limit
-        repeated sends.{" "}
-        {SHOW_TODOS && <Todo what="Natalia, Valentina: confirm these durations" />}
+        repeated sends.
       </p>
       <p>
         <strong>Why.</strong> To reply to your request and discuss your project, to block spam,
@@ -38,36 +37,21 @@ export function PrivacyNoteBody() {
         <strong>Who handles it.</strong> This site is hosted on Vercel. Your message is sent by
         Resend, an email service, to our company inbox, hosted by Hostinger. The form has no
         database and takes no files. Resend keeps the content of your message for its own
-        retention period.{" "}
-        {SHOW_TODOS && <Todo what="Marlon, Renata: how long Resend keeps message content" />} Our
-        hosting and email providers may keep their own technical records.{" "}
-        {SHOW_TODOS && <Todo what="Natalia, Valentina: confirm the processor and technical-records sentence" />}
+        retention period. Our
+        hosting and email providers may keep their own technical records.
       </p>
       <p>
         While you type, a draft of your answers is kept in this browser tab only. It never
         includes the consent box. It is cleared once your request is sent.
       </p>
-      {SHOW_TODOS && (
-        <p>
-          <strong>How long we keep it.</strong>{" "}
-          <Todo what="Marlon: retention period; where the email is kept, for how long, who can read the inbox" />
-        </p>
-      )}
       <p>
         <strong>Corrections and deletion.</strong> Email info@inspirebusinesstechnology.com to ask
         us to correct or delete your details.
       </p>
       <p>
-        Inspire Business Group LLC.{" "}
-        {SHOW_TODOS && <Todo what="Marlon: legal entity address, data-protection contact, governing law" />}
+        Inspire Business Group LLC.
       </p>
       <p className="privacy__version">Privacy note version: {PRIVACY_NOTE_VERSION}</p>
-      {SHOW_TODOS && (
-        <p>
-          <Todo what="Marlon, counsel: whether processor countries should be named" />{" "}
-          <Todo what="Marlon: if a second copy of each request is stored anywhere, the no-database sentence changes" />
-        </p>
-      )}
     </div>
   )
 }

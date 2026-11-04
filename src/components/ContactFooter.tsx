@@ -1,24 +1,16 @@
-import Todo, { SHOW_TODOS } from "@/components/Todo"
-import { content } from "@/content"
-import { isKeyboardClick, scrollToSection } from "@/lib/lenis"
-
-const EMAIL = "info@inspirebusinesstechnology.com"
-
-const EXPLORE = [
-  { label: "Mission", href: "#mission" },
-  { label: "Services", href: "#services" },
-  { label: "Products", href: "#products" },
-  { label: "About", href: "#about" },
-  { label: "Request services", href: "#request-services" },
-] as const
+import { Wordmark } from "@/components/Brand"
+import { content, EMAIL, LEGAL_NAME, NAV_LINKS } from "@/content"
+import { scrollToSection } from "@/lib/scroll"
 
 /** Opens the privacy note and brings it into view. */
-function openPrivacyNote(keyboard: boolean) {
+function openPrivacyNote() {
   const el = document.getElementById("privacy-note") as HTMLDetailsElement | null
   if (!el) return
   el.open = true
-  scrollToSection("#privacy-note", { keyboard })
+  scrollToSection("#privacy-note")
 }
+
+const EXPLORE = [...NAV_LINKS, { label: "Request services", href: "#request-services" }] as const
 
 export default function ContactFooter() {
   return (
@@ -26,20 +18,13 @@ export default function ContactFooter() {
       <div className="wrap">
         <div className="footer__grid">
           <div className="f-brand">
-            <a
-              href="#top"
-              className="wordmark"
-              translate="no"
-              aria-label="Inspire Business Group, back to top"
+            <Wordmark
               onClick={(e) => {
                 e.preventDefault()
-                scrollToSection("#top", { keyboard: isKeyboardClick(e) })
+                scrollToSection("#top")
               }}
-            >
-              Inspire{" "}
-            <span className="text-gradient">Business Group</span>
-            </a>
-            <p>Inspire Business Group LLC is a technology and education venture studio.</p>
+            />
+            <p>Websites, apps and brand identity for small businesses across the US.</p>
             <p>
               Prefer email?
               <br />
@@ -47,12 +32,10 @@ export default function ContactFooter() {
                 {EMAIL}
               </a>
             </p>
-            {SHOW_TODOS && <Todo what="Marlon: real logo file (SVG) to replace the wordmark text and the interim favicon" />}
-            {SHOW_TODOS && <Todo what="Marlon: do you want partnership enquiries? If yes, add a form option or a footer line" />}
           </div>
 
           <nav className="f-col f-col1" aria-label="Explore">
-            <p className="eyebrow">Explore</p>
+            <p className="mono-label">Explore</p>
             <ul>
               {EXPLORE.map((l) => (
                 <li key={l.href}>
@@ -60,7 +43,7 @@ export default function ContactFooter() {
                     href={l.href}
                     onClick={(e) => {
                       e.preventDefault()
-                      scrollToSection(l.href, { keyboard: isKeyboardClick(e) })
+                      scrollToSection(l.href)
                     }}
                   >
                     {l.label}
@@ -71,11 +54,17 @@ export default function ContactFooter() {
           </nav>
 
           <div className="f-col f-col2">
-            <p className="eyebrow">Products</p>
+            <p className="mono-label">Our own products</p>
             <ul>
               {content.products.map((p, i) => (
                 <li key={`${p.name}-${i}`}>
-                  {p.url ? <a href={p.url} rel="noopener" translate="no">{p.name}</a> : <span translate="no">{p.name}</span>}
+                  {p.url ? (
+                    <a href={p.url} rel="noopener" translate="no">
+                      {p.name}
+                    </a>
+                  ) : (
+                    <span translate="no">{p.name}</span>
+                  )}
                 </li>
               ))}
             </ul>
@@ -83,14 +72,14 @@ export default function ContactFooter() {
         </div>
 
         <div className="footer__base">
-          <span className="inline-flex min-h-11 items-center">
-            © {new Date().getFullYear()} Inspire Business Group LLC. All rights reserved.
+          <span className="footer__legal">
+            © {new Date().getFullYear()} {LEGAL_NAME}. All rights reserved.
           </span>
           <a
             href="#privacy-note"
             onClick={(e) => {
               e.preventDefault()
-              openPrivacyNote(isKeyboardClick(e))
+              openPrivacyNote()
             }}
           >
             Privacy note

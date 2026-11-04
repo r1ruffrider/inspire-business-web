@@ -1,13 +1,13 @@
 import type { ReactNode } from "react"
 import { ArrowDown, ArrowRight } from "lucide-react"
 import { Button, type ButtonProps } from "@/components/ui/button"
-import { isKeyboardClick, scrollToSection } from "@/lib/lenis"
+import { scrollToSection } from "@/lib/scroll"
 
-// Event name phase 2's form can listen for to preselect a service when a
-// "Request" link on a service row is used. App holds no state for this.
+// Event the form listens for to preselect a service when a service's
+// "Request" link is used. App holds no state for this.
 export const PRESELECT_EVENT = "request-services:preselect"
 
-/** The one primary action: scrolls to the request section. Label is fixed by COPY. */
+/** The one primary action: jumps to the request form. Same words everywhere. */
 export function RequestCta({
   variant = "primary",
   size,
@@ -17,6 +17,8 @@ export function RequestCta({
   ariaLabel,
   onActivate,
   className,
+  id,
+  tabIndex,
 }: {
   variant?: ButtonProps["variant"]
   size?: ButtonProps["size"]
@@ -28,10 +30,14 @@ export function RequestCta({
   /** Called on activation (e.g. to close the mobile menu first). */
   onActivate?: () => void
   className?: string
+  id?: string
+  tabIndex?: number
 }) {
   return (
     <Button asChild variant={variant} size={size} block={block} className={className}>
       <a
+        id={id}
+        tabIndex={tabIndex}
         href="#request-services"
         aria-label={ariaLabel}
         onClick={(e) => {
@@ -40,7 +46,7 @@ export function RequestCta({
           if (service) {
             window.dispatchEvent(new CustomEvent(PRESELECT_EVENT, { detail: { service } }))
           }
-          scrollToSection("#request-services", { keyboard: isKeyboardClick(e) })
+          scrollToSection("#request-services")
         }}
       >
         {label}
@@ -50,18 +56,15 @@ export function RequestCta({
   )
 }
 
-/** Quiet text link that scrolls to a section, with a down arrow. */
-export function SeeLink({ href = "#products", children = "See what we build" }: {
-  href?: string
-  children?: ReactNode
-}) {
+/** Quiet text link that jumps to a section, with a down arrow. */
+export function SeeLink({ href, children }: { href: string; children: ReactNode }) {
   return (
     <a
       className="link"
       href={href}
       onClick={(e) => {
         e.preventDefault()
-        scrollToSection(href, { keyboard: isKeyboardClick(e) })
+        scrollToSection(href)
       }}
     >
       {children}

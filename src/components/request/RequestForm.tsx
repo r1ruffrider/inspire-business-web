@@ -10,7 +10,7 @@ import {
   type MouseEvent as ReactMouseEvent,
   type ReactNode,
 } from "react"
-import { AlertCircle, Check, CircleCheck, Hexagon, Layers, Monitor, type LucideIcon } from "lucide-react"
+import { AlertCircle, AppWindow, Check, CircleCheck, Monitor, PenTool, type LucideIcon } from "lucide-react"
 import {
   HONEYPOT_FIELD,
   LIMITS,
@@ -21,7 +21,6 @@ import {
   type FieldError as FieldErr,
   type FieldName,
 } from "@shared/serviceRequest"
-import Todo, { SHOW_TODOS } from "@/components/Todo"
 import PrivacyNote from "@/components/request/PrivacyNote"
 import { PRESELECT_EVENT } from "@/components/ui/actions"
 import {
@@ -83,8 +82,8 @@ const FOCUS_ID: Record<FieldName, string> = {
 
 const SERVICE_OPTIONS: { value: string; label: string; Icon: LucideIcon }[] = [
   { value: "website", label: "Website", Icon: Monitor },
-  { value: "logo", label: "Logo", Icon: Hexagon },
-  { value: "branding", label: "Business branding", Icon: Layers },
+  { value: "app", label: "App", Icon: AppWindow },
+  { value: "brand", label: "Brand identity (logo + branding)", Icon: PenTool },
 ]
 
 const TIMELINE_OPTIONS = [
@@ -962,7 +961,6 @@ export default function RequestForm() {
           <p>
             Email us at <a className="f-mail" href={`mailto:${EMAIL}`}>{EMAIL}</a>
           </p>
-          {SHOW_TODOS && <Todo what="Marlon, Renata: set VITE_TURNSTILE_SITE_KEY for the production build; the form stays hidden (email fallback only) until it is set" />}
         </div>
         <PrivacyNote />
       </>
