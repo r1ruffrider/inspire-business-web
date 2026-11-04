@@ -1,28 +1,41 @@
 # Inspire Business Group
 
-> Inspire Business Group LLC is a technology and education venture studio. It builds platforms built to help people learn, certify and live better, and it takes requests for websites, logos and business branding.
-
-## Request services
-
-- [Request services](https://www.inspirebusinesstechnology.com/#request-services): Choose a website, a logo, business branding or any mix, and describe your project. Requests go to info@inspirebusinesstechnology.com.
+> Inspire Business Group LLC designs and builds websites, apps and brand identity, including logo design, for small businesses across the US. We work remotely. Every project starts with a free consultation.
 
 ## Services
 
-- Website
-- Logo
-- Business branding
+- **Web design**: a website for your business, designed and built for you.
+- **App development**: an app for your business or your customers, designed and built for you.
+- **Brand identity (logo design)**: a logo package (logo design on its own) or a full brand identity (your logo plus the rest of your brand).
 
-## Products
+## Who it is for
 
-- Forge: an AI-powered learning and testing platform. Exam prep for high-stakes certifications, starting with CISSP, with adaptive practice, deep explanations and structured study paths.
-- Fluyo: AI-powered language learning that combines adaptive learning, conversational AI, real-world practice and interactive content.
-- Smart Home Certification: a certification platform that certifies homes by their level of smart-technology integration, for homeowners, builders, insurers and real estate professionals. Domains: Energy, Safety, Security, Comfort, Networks, Documentation.
+Small businesses anywhere in the US.
 
-## About
+## How a project runs
 
-- Mission: we build intelligent platforms that solve meaningful problems through innovation, education, and technology, helping people and organizations reach their full potential.
-- Belief: technology should be intuitive, accessible, and transformative.
+1. Free consultation
+2. Proposal & fixed quote
+3. Design
+4. Build
+5. Launch & handoff
 
-## Contact
+## Products we build ourselves
 
-- info@inspirebusinesstechnology.com
+- Forge: AI-powered exam prep for high-stakes certifications, starting with CISSP.
+- Fluyo: AI-powered language learning with conversational AI and real-world practice.
+- Smart Home Certification: certifies homes by their level of smart-technology integration.
+
+## FAQ
+
+- What does Inspire Business Group do? We design and build websites and apps, and we create brand identities, from a logo package to a full brand identity.
+- Who do you work with? Small businesses across the US.
+- How does a project start? Send a request with the form on the site, or email info@inspirebusinesstechnology.com. Every project starts with a free consultation, followed by a proposal with a fixed quote, then design, build, and launch and handoff.
+- Where do you work? We work remotely with small businesses anywhere in the US.
+- Can I ask for more than one service? Yes. In the request form you can choose a website, an app, brand identity, or any mix.
+
+## Links
+
+- [Home](https://www.inspirebusinesstechnology.com/)
+- [Request services](https://www.inspirebusinesstechnology.com/#request-services)
+- Email: info@inspirebusinesstechnology.com
