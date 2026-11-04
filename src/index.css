@@ -22,6 +22,20 @@ body {
   -moz-osx-font-smoothing: grayscale;
   font-feature-settings: "ss01" 0;
 }
+/* long words and URLs wrap instead of widening the page (break-UI) */
+h1,
+h2,
+h3,
+p,
+li,
+dt,
+dd,
+a,
+summary,
+legend,
+label {
+  overflow-wrap: anywhere;
+}
 img,
 svg {
   display: block;
@@ -624,6 +638,12 @@ label.cons {
   gap: 16px;
   padding: 28px 0;
   border-bottom: 1px solid var(--line);
+}
+@media (max-width: 479px) {
+  .svc-row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
 }
 .svc-row__body {
   display: grid;
