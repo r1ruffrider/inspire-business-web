@@ -119,13 +119,9 @@ export function formatUtc(date: Date, precision: 'second' | 'minute' = TIMESTAMP
   return formatStamp(date, 'UTC', precision)
 }
 
-/** Qatar has no DST. If Intl lacks the zone, the deterministic fallback is UTC plus 3 hours. */
-export function formatQatar(date: Date, precision: 'second' | 'minute' = TIMESTAMP_PRECISION): string {
-  try {
-    return formatStamp(date, 'Asia/Qatar', precision)
-  } catch {
-    return formatStamp(new Date(date.getTime() + 3 * 60 * 60 * 1000), 'UTC', precision)
-  }
+/** Fixed UTC+3 (no DST), computed as UTC plus 3 hours; no named time zone is used. */
+export function formatUtcPlus3(date: Date, precision: 'second' | 'minute' = TIMESTAMP_PRECISION): string {
+  return formatStamp(new Date(date.getTime() + 3 * 60 * 60 * 1000), 'UTC', precision)
 }
 
 // ---------------------------------------------------------------------------
@@ -241,7 +237,7 @@ export interface ComposeParams {
 export function composeEmail(p: ComposeParams): MailMessage {
   const v = p.value
   const utc = formatUtc(p.now)
-  const qatar = formatQatar(p.now)
+  const utcPlus3 = formatUtcPlus3(p.now)
 
   const user = (label: string, text: string): Row => ({
     kind: 'user',
@@ -256,7 +252,7 @@ export function composeEmail(p: ComposeParams): MailMessage {
     { kind: 'plain', label: 'Reference', value: p.reference },
     { kind: 'heading', text: 'SUBMITTED' },
     { kind: 'plain', label: 'UTC', value: utc },
-    { kind: 'plain', label: 'Qatar', value: `${qatar} (Asia/Qatar, UTC+03:00)` },
+    { kind: 'plain', label: 'UTC+3', value: `${utcPlus3} (UTC+3)` },
     { kind: 'heading', text: 'CONTACT' },
     user('Name', v.name),
     user('Email', v.email),

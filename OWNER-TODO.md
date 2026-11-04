@@ -62,10 +62,11 @@ from in c5b7ed2 is in brackets.
 25. **Process durations.** None are shown because none are sourced. Add only if Marlon supplies them.
 26. **Reply-time promise.** "We reply within 1 business day" is not shown (see item 9).
 27. **Terms and Privacy pages.** Not created in this pass (brief v2). Privacy stays the in-page note.
-28. **Internal request email shows a Qatar timestamp.** `server/serviceRequest/email.ts` prints a "Qatar:"
-    line (Asia/Qatar time) in the email sent to the company inbox. It is not on the website and not in
-    `dist/`, and server logic was out of scope for this pass (copy and the service list only). Marlon to decide
-    whether it should show a US time zone instead.
+28. **Resolved (round r1b): internal request email timestamp is now zone-neutral.** `server/serviceRequest/email.ts`
+    used to print a second timestamp under a named country zone. It now prints a "UTC+3:" line, value
+    "<stamp> (UTC+3)", computed as UTC plus 3 hours with no named time zone (`formatUtcPlus3`), next to the
+    existing "UTC:" line. This email goes only to the company inbox; it is not on the website and not in `dist/`.
+    Tests updated and passing. Optional: Marlon may still want a US time zone line instead.
 29. **Service ids changed with the form.** The form's services are now Website, App and Brand identity
     (logo + branding); the shared validator and the server accept `website`, `app`, `brand` (was `website`,
     `logo`, `branding`). Client and server ship together, and all server tests pass, but anything outside this

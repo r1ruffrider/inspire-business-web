@@ -6,7 +6,7 @@ import {
   buildSubject,
   composeEmail,
   escapeHtml,
-  formatQatar,
+  formatUtcPlus3,
   formatUtc,
   PRIVACY_NOTE_VERSION,
   sanitizeForSubject,
@@ -73,17 +73,17 @@ describe('subject', () => {
 })
 
 describe('timestamps', () => {
-  it('prints UTC and Asia/Qatar for a fixed clock', () => {
+  it('prints UTC and UTC+3 for a fixed clock', () => {
     assert.equal(formatUtc(new Date('2026-10-28T14:03:22Z'), 'second'), '2026-10-28 14:03:22')
-    assert.equal(formatQatar(new Date('2026-10-28T14:03:22Z'), 'second'), '2026-10-28 17:03:22')
+    assert.equal(formatUtcPlus3(new Date('2026-10-28T14:03:22Z'), 'second'), '2026-10-28 17:03:22')
   })
-  it('rolls the date over: UTC 22:30 is the next day in Qatar', () => {
+  it('rolls the date over: UTC 22:30 is the next day at UTC+3', () => {
     assert.equal(formatUtc(new Date('2026-10-28T22:30:05Z'), 'second'), '2026-10-28 22:30:05')
-    assert.equal(formatQatar(new Date('2026-10-28T22:30:05Z'), 'second'), '2026-10-29 01:30:05')
+    assert.equal(formatUtcPlus3(new Date('2026-10-28T22:30:05Z'), 'second'), '2026-10-29 01:30:05')
   })
   it('uses a 24-hour clock at midnight and across a year boundary', () => {
     assert.equal(formatUtc(new Date('2026-12-31T00:00:00Z'), 'second'), '2026-12-31 00:00:00')
-    assert.equal(formatQatar(new Date('2026-12-31T21:00:00Z'), 'second'), '2027-01-01 00:00:00')
+    assert.equal(formatUtcPlus3(new Date('2026-12-31T21:00:00Z'), 'second'), '2027-01-01 00:00:00')
   })
   it('minute precision drops the seconds', () => {
     assert.equal(formatUtc(new Date('2026-10-28T14:03:22Z'), 'minute'), '2026-10-28 14:03')
@@ -120,7 +120,7 @@ describe('composeEmail', () => {
         '',
         'SUBMITTED',
         '  UTC:                  2026-10-28 14:03',
-        '  Qatar:                2026-10-28 17:03 (Asia/Qatar, UTC+03:00)',
+        '  UTC+3:                2026-10-28 17:03 (UTC+3)',
         '',
         'CONTACT',
         '  Name:                 > Amira Haddad',
@@ -152,7 +152,7 @@ describe('composeEmail', () => {
   })
   it('every label is present, and empty optional values print "Not provided"', () => {
     const m = compose({ phone: '', timeline: '', referral_source: '', links: '' })
-    for (const label of ['Reference:', 'UTC:', 'Qatar:', 'Name:', 'Email:', 'Phone:', 'Business name:', 'Services:', 'Timeline:', 'Heard about us via:', 'PROJECT DESCRIPTION', 'LINKS', 'CONSENT', 'Privacy note version:']) {
+    for (const label of ['Reference:', 'UTC:', 'UTC+3:', 'Name:', 'Email:', 'Phone:', 'Business name:', 'Services:', 'Timeline:', 'Heard about us via:', 'PROJECT DESCRIPTION', 'LINKS', 'CONSENT', 'Privacy note version:']) {
       assert.ok(m.text.includes(label), label)
       assert.ok(m.html.includes(label.replace(':', '')), 'html ' + label)
     }
@@ -229,6 +229,6 @@ describe('composeEmail', () => {
   it('a timestamp is taken from the injected clock only', () => {
     const m = compose({}, true, new Date('2026-10-28T22:30:05Z'))
     assert.ok(m.text.includes('2026-10-28 22:30'))
-    assert.ok(m.text.includes('2026-10-29 01:30 (Asia/Qatar, UTC+03:00)'))
+    assert.ok(m.text.includes('2026-10-29 01:30 (UTC+3)'))
   })
 })
