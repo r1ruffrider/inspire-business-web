@@ -52,10 +52,11 @@ ratios. No gradients, glows or coloured headlines anywhere.
 
 ## Motion (state only)
 - Press: `scale(0.97)` on buttons, burger and service tiles, 120 ms ease-out (`--ease-out` = cubic-bezier(0.23,1,0.32,1)).
-- Hover colour: 150 ms. Menu enter: opacity 0 -> 1 and scale(0.95) -> 1, 200 ms, `transform-origin: top right`,
+- Hover: colour, background and border change instantly (not animated); the CTA arrow nudges 2 px
+  (transform, 150 ms). Menu enter: opacity 0 -> 1 and scale(0.95) -> 1, 200 ms, `transform-origin: top right`,
   via CSS transition + `@starting-style` (no keyframes). FAQ icon rotates 45deg, 200 ms. Error text fades in
   150 ms. Success panel enters from scale(0.98) + opacity. Sticky CTA: opacity + 12 px slide, 200 ms.
-- Only transform, opacity and colour animate. Nothing is scroll-linked (no smooth scroll, parallax, pinning,
+- Only transform and opacity animate (all under 300 ms, ease-out); colour, shadow and layout never do. Nothing is scroll-linked (no smooth scroll, parallax, pinning,
   scrubbing or fade-in on scroll). The only keyframes are the form's loading spinner.
 - `prefers-reduced-motion: reduce`: every duration token is 0 ms, a global rule forces 0 ms on everything,
   nothing scales, the spinner stops.

@@ -259,11 +259,7 @@ label.cons {
   text-decoration: none;
   cursor: pointer;
   user-select: none;
-  transition:
-    background-color var(--dur-fast) var(--ease-out),
-    border-color var(--dur-fast) var(--ease-out),
-    color var(--dur-fast) var(--ease-out),
-    transform var(--dur-press) var(--ease-out);
+  transition: transform var(--dur-press) var(--ease-out);
 }
 .btn:active {
   transform: scale(0.97);
@@ -321,7 +317,6 @@ label.cons {
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 5px;
-  transition: color var(--dur-fast) var(--ease-out);
 }
 .link svg {
   width: 16px;
@@ -508,7 +503,6 @@ label.cons {
     font-size: 15px;
     font-weight: 500;
     text-decoration: none;
-    transition: color var(--dur-fast) var(--ease-out);
   }
   .burger,
   .menu {
@@ -1305,7 +1299,6 @@ label.cons {
   line-height: 1.4;
   appearance: none;
   -webkit-appearance: none;
-  transition: border-color var(--dur-fast) var(--ease-out);
 }
 textarea.ctl {
   height: auto;
@@ -1408,10 +1401,7 @@ select.ctl {
   border: 1px solid var(--line-strong);
   border-radius: var(--r-control);
   cursor: pointer;
-  transition:
-    border-color var(--dur-fast) var(--ease-out),
-    background-color var(--dur-fast) var(--ease-out),
-    transform var(--dur-press) var(--ease-out);
+  transition: transform var(--dur-press) var(--ease-out);
 }
 .svc:active {
   transform: scale(0.97);
@@ -1441,9 +1431,6 @@ select.ctl {
   border: 1.5px solid var(--line-strong);
   border-radius: 6px;
   background: var(--surface);
-  transition:
-    background-color var(--dur-fast) var(--ease-out),
-    border-color var(--dur-fast) var(--ease-out);
 }
 .svc .box svg {
   width: 14px;
@@ -1505,9 +1492,6 @@ select.ctl {
   border: 1.5px solid var(--line-strong);
   border-radius: 6px;
   cursor: pointer;
-  transition:
-    background-color var(--dur-fast) var(--ease-out),
-    border-color var(--dur-fast) var(--ease-out);
 }
 .cons input:checked {
   background: var(--accent)
