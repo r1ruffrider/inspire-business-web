@@ -294,6 +294,11 @@ describe('services and timeline', () => {
     assert.deepEqual(only({ services: [] }), { field: 'services', code: 'required' })
     assert.deepEqual(only({ services: ['seo'] }), { field: 'services', code: 'not_allowed' })
     assert.deepEqual(only({ services: ['Website'] }), { field: 'services', code: 'not_allowed' })
+  })
+  it('rejects the retired ids logo and branding (now brand)', () => {
+    assert.deepEqual(only({ services: ['logo'] }), { field: 'services', code: 'not_allowed' })
+    assert.deepEqual(only({ services: ['branding'] }), { field: 'services', code: 'not_allowed' })
+    assert.deepEqual(only({ services: ['website', 'logo'] }), { field: 'services', code: 'not_allowed' })
     assert.deepEqual(only({ services: ['website', 'x'.repeat(40)] }), { field: 'services', code: 'not_allowed' })
     assert.deepEqual(only({ services: Array.from({ length: 7 }, () => 'app') }), { field: 'services', code: 'invalid' })
     assert.deepEqual(only({ services: Array.from({ length: 10 }, () => 'app') }), { field: 'services', code: 'invalid' })

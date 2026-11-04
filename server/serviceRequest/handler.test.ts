@@ -392,6 +392,18 @@ describe('validation (step 8)', () => {
     assert.equal(h.net.calls.length, 0, 'no token spent')
   })
 
+  it('rejects the retired service ids logo and branding with 422 services:not_allowed, nothing sent', async () => {
+    for (const services of [['logo'], ['branding'], ['website', 'branding']]) {
+      const h = makeHarness(prodEnv())
+      const res = await send(h, { body: validBody({ services }) })
+      assert.equal(res.status, 422, JSON.stringify(services))
+      const body = JSON.parse(await res.text()) as { errors: Array<{ field: string; code: string }> }
+      assert.deepEqual(body.errors, [{ field: 'services', code: 'not_allowed' }])
+      assert.equal(h.net.calls.length, 0, 'no token spent')
+      assert.equal(h.net.resendCalls().length, 0, 'nothing sent')
+    }
+  })
+
   it('wrong types are rejected without coercion', async () => {
     for (const over of [{ consent: 'true' }, { consent: 1 }, { consent: false }, { name: 123 }, { services: 'website' }, { services: [1] }, { timeline: 5 }, { description: ['x'] }]) {
       const h = makeHarness(prodEnv())
