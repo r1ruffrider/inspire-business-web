@@ -100,8 +100,8 @@ describe('unknown keys and shapes', () => {
     assert.deepEqual(checkWireShape(b), { ok: true, honeypot: '', token: undefined })
   })
   it('services raw length over 6 fails the wire shape', () => {
-    assert.deepEqual(checkWireShape(base({ services: Array.from({ length: 7 }, () => 'logo') })), { ok: false })
-    assert.equal(checkWireShape(base({ services: Array.from({ length: 6 }, () => 'logo') })).ok, true)
+    assert.deepEqual(checkWireShape(base({ services: Array.from({ length: 7 }, () => 'app') })), { ok: false })
+    assert.equal(checkWireShape(base({ services: Array.from({ length: 6 }, () => 'app') })).ok, true)
   })
   it('does not coerce types', () => {
     assert.deepEqual(only({ consent: 'true' }), { field: 'consent', code: 'invalid' })
@@ -288,16 +288,16 @@ describe('phone', () => {
 
 describe('services and timeline', () => {
   it('de-duplicates and orders canonically', () => {
-    assert.deepEqual(ok({ services: ['branding', 'website', 'branding', 'logo'] }).services, ['website', 'logo', 'branding'])
+    assert.deepEqual(ok({ services: ['brand', 'website', 'brand', 'app'] }).services, ['website', 'app', 'brand'])
   })
   it('requires at least one, rejects unknown values, rejects more than 6 raw', () => {
     assert.deepEqual(only({ services: [] }), { field: 'services', code: 'required' })
     assert.deepEqual(only({ services: ['seo'] }), { field: 'services', code: 'not_allowed' })
     assert.deepEqual(only({ services: ['Website'] }), { field: 'services', code: 'not_allowed' })
     assert.deepEqual(only({ services: ['website', 'x'.repeat(40)] }), { field: 'services', code: 'not_allowed' })
-    assert.deepEqual(only({ services: Array.from({ length: 7 }, () => 'logo') }), { field: 'services', code: 'invalid' })
-    assert.deepEqual(only({ services: Array.from({ length: 10 }, () => 'logo') }), { field: 'services', code: 'invalid' })
-    ok({ services: Array.from({ length: 6 }, () => 'logo') })
+    assert.deepEqual(only({ services: Array.from({ length: 7 }, () => 'app') }), { field: 'services', code: 'invalid' })
+    assert.deepEqual(only({ services: Array.from({ length: 10 }, () => 'app') }), { field: 'services', code: 'invalid' })
+    ok({ services: Array.from({ length: 6 }, () => 'app') })
   })
   it('timeline: empty or one of the four values', () => {
     for (const t of ['', 'asap', '1-3-months', 'flexible', 'unsure']) assert.equal(ok({ timeline: t }).timeline, t)
@@ -414,7 +414,7 @@ describe('consent', () => {
 describe('validateField and error ordering', () => {
   it('validateField returns null for valid values and accepts the raw shapes of each control', () => {
     assert.equal(validateField('name', 'A'), null)
-    assert.equal(validateField('services', ['logo']), null)
+    assert.equal(validateField('services', ['app']), null)
     assert.equal(validateField('consent', true), null)
     assert.equal(validateField('timeline', ''), null)
     assert.equal(validateField('links', ''), null)
@@ -429,7 +429,7 @@ describe('validateField and error ordering', () => {
 describe('client helpers', () => {
   it('buildWireRequest emits exactly the wire keys', () => {
     const w = buildWireRequest(
-      { name: 'a', email: 'b', phone: '', business_name: 'c', services: ['logo'], description: 'd', links: '', timeline: '', referral_source: '', consent: true },
+      { name: 'a', email: 'b', phone: '', business_name: 'c', services: ['app'], description: 'd', links: '', timeline: '', referral_source: '', consent: true },
       { homepage_url: '', turnstile_token: 't' },
     )
     assert.deepEqual(Object.keys(w).sort(), [...WIRE_KEYS].sort())

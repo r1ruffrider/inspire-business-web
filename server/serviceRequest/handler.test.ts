@@ -80,7 +80,7 @@ describe('happy path', () => {
     const payload = assertFixedResend(h.net, REAL_INBOX)
     assert.equal(h.net.resendCalls()[0]!.headers['idempotency-key'], 'sr-' + key.toLowerCase())
     assert.equal(payload.reply_to, 'amira@acmecoffee.example')
-    assert.equal(payload.subject, 'New service request: Website, Logo - Acme Coffee Roasters')
+    assert.equal(payload.subject, 'New service request: Website, App - Acme Coffee Roasters')
     assert.match(h.net.resendCalls()[0]!.headers.authorization ?? '', /^Bearer /)
     assert.deepEqual(h.logs.map((l) => (JSON.parse(l) as { event: string }).event), ['sent'])
   })
@@ -797,7 +797,7 @@ describe('header injection and escaping in every text field', () => {
     const subject = resendPayload(h.net).subject as string
     assert.doesNotMatch(subject, /[\p{Cc}\p{Zl}\p{Zp}]/u)
     assert.ok(Array.from(subject).length <= 150)
-    assert.match(subject, /^New service request: Website, Logo - Acme Bcc: attacker@example\.test/)
+    assert.match(subject, /^New service request: Website, App - Acme Bcc: attacker@example\.test/)
     assert.ok(subject.endsWith(String.fromCharCode(0x2026)), 'long business name is cut with an ellipsis')
   })
 

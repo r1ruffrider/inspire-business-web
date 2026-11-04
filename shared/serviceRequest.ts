@@ -18,7 +18,7 @@
 // Constants (frontend contract)
 // ---------------------------------------------------------------------------
 
-export const SERVICES = ['website', 'logo', 'branding'] as const
+export const SERVICES = ['website', 'app', 'brand'] as const
 export const TIMELINES = ['asap', '1-3-months', 'flexible', 'unsure'] as const
 export type Service = (typeof SERVICES)[number]
 export type Timeline = (typeof TIMELINES)[number]

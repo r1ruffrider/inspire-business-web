@@ -42,8 +42,8 @@ const MARKER = '> '
 
 const SERVICE_LABELS: Record<(typeof SERVICES)[number], string> = {
   website: 'Website',
-  logo: 'Logo',
-  branding: 'Business branding',
+  app: 'App',
+  brand: 'Brand identity (logo + branding)',
 }
 const TIMELINE_LABELS: Record<string, string> = {
   asap: 'As soon as possible',

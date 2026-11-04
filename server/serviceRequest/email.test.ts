@@ -46,8 +46,8 @@ describe('escapeHtml', () => {
 
 describe('subject', () => {
   it('lists services in canonical order with the business name', () => {
-    assert.equal(buildSubject(value({ services: ['logo', 'website'] }), true), 'New service request: Website, Logo - Acme Coffee Roasters')
-    assert.equal(buildSubject(value({ services: ['branding'] }), true), 'New service request: Business branding - Acme Coffee Roasters')
+    assert.equal(buildSubject(value({ services: ['app', 'website'] }), true), 'New service request: Website, App - Acme Coffee Roasters')
+    assert.equal(buildSubject(value({ services: ['brand'] }), true), 'New service request: Brand identity (logo + branding) - Acme Coffee Roasters')
   })
   it('[TEST] prefix only off production', () => {
     assert.ok(buildSubject(value(), false).startsWith('[TEST] New service request:'))
@@ -129,7 +129,7 @@ describe('composeEmail', () => {
         '  Business name:        > Acme Coffee Roasters',
         '',
         'REQUEST',
-        '  Services:             Website, Logo',
+        '  Services:             Website, App',
         '  Timeline:             Within 1 to 3 months',
         '  Heard about us via:   > A friend who runs a bakery',
         '',

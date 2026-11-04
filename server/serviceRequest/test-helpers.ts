@@ -80,7 +80,7 @@ export function validBody(over: Record<string, unknown> = {}): Record<string, un
     email: 'amira@acmecoffee.example',
     phone: '',
     business_name: 'Acme Coffee Roasters',
-    services: ['website', 'logo'],
+    services: ['website', 'app'],
     description: 'We sell roasted coffee online and need a new website and a logo for the bags.',
     links: 'acmecoffee.example',
     timeline: '1-3-months',
