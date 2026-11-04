@@ -1712,14 +1712,10 @@ select.ctl {
   font-size: var(--fs-label);
 }
 
-/* no-JavaScript note */
-.noscript {
-  margin: 0;
-  padding: 16px var(--gutter);
-  background: var(--accent-soft);
+/* no-JavaScript note, inside the email-only stub where the form would be */
+.stub__note {
+  font-weight: 600;
   color: var(--ink);
-  font-size: var(--fs-small);
-  text-align: center;
 }
 
 /* ------------------------------------------------------------------

@@ -71,3 +71,8 @@ ratios. No gradients, glows or coloured headlines anywhere.
 "IB" monogram: white I and B on an indigo #4338CA rounded square, drawn with paths (no font dependency). Used in
 `public/favicon.svg`, `public/apple-touch-icon.png`, the nav and footer wordmark (`src/components/Brand.tsx`) and
 `public/og-image.jpg`. Wordmark is plain text. Flagged in OWNER-TODO.md until a real logo exists.
+
+## No JavaScript
+The request form is mounted in the browser only. The prerendered HTML (what a visitor with JavaScript off
+sees) has, where the form sits, a `<noscript>` notice "The request form needs JavaScript, which is off in this browser."
+and the mailto link, plus the privacy note. No `<form>` exists without JavaScript, so nothing can post to `/`.

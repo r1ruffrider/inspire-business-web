@@ -4,6 +4,7 @@ import {
   useEffect,
   useRef,
   useState,
+  useSyncExternalStore,
   type ChangeEvent,
   type FocusEvent,
   type FormEvent,
@@ -923,7 +924,38 @@ function Success({
   )
 }
 
+// The form exists only in the browser. The build-time prerender (and so a
+// visitor with JavaScript off) gets the email-only stub: a form without its
+// script would post to "/" and lose what the visitor typed.
+const noSubscribe = () => () => {}
+function useInBrowser(): boolean {
+  return useSyncExternalStore(
+    noSubscribe,
+    () => true,
+    () => false,
+  )
+}
+
+function EmailOnlyStub({ withNoscript }: { withNoscript: boolean }) {
+  return (
+    <>
+      <div className="stub">
+        {withNoscript && (
+          <noscript>
+            <p className="stub__note">The request form needs JavaScript, which is off in this browser.</p>
+          </noscript>
+        )}
+        <p>
+          Email us at <a className="f-mail" href={`mailto:${EMAIL}`}>{EMAIL}</a>
+        </p>
+      </div>
+      <PrivacyNote />
+    </>
+  )
+}
+
 export default function RequestForm() {
+  const inBrowser = useInBrowser()
   const [session, setSession] = useState(0)
   const [success, setSuccess] = useState<{ name: string; id?: string; height: number } | null>(null)
   const [preselect, setPreselect] = useState<{ service: string; nonce: number } | null>(null)
@@ -953,19 +985,11 @@ export default function RequestForm() {
     return () => window.removeEventListener(PRESELECT_EVENT, on)
   }, [reset])
 
+  // Prerendered HTML (JavaScript off): no form, only the notice and the email link.
+  if (!inBrowser) return <EmailOnlyStub withNoscript />
+
   // Fail closed: a production build with no Turnstile site key is not a working form.
-  if (!TURNSTILE_CONFIGURED) {
-    return (
-      <>
-        <div className="stub">
-          <p>
-            Email us at <a className="f-mail" href={`mailto:${EMAIL}`}>{EMAIL}</a>
-          </p>
-        </div>
-        <PrivacyNote />
-      </>
-    )
-  }
+  if (!TURNSTILE_CONFIGURED) return <EmailOnlyStub withNoscript={false} />
 
   return (
     <>
