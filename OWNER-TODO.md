@@ -7,7 +7,8 @@ Written Wed Nov 4, 2026 (UTC+3) by Daniela on branch `feature/pro-refine-v2`, fr
 
 These appeared on the page as dashed "TODO" chips (preview builds with a show-TODOs env flag). Every chip and the
 `<Todo>` component are now removed from the code, and in round r1c the flag itself was removed from the
-boundary-check allowlist (a test now fails the build check if it reappears). Text is exactly as rendered ("TODO" + the note); where it came
+boundary-check allowlist: if it reappears, `npm run check:boundaries` fails, and a regression test makes `npm test`
+fail too (the build itself does not run this check). Text is exactly as rendered ("TODO" + the note); where it came
 from in c5b7ed2 is in brackets.
 
 ### Hero proof strip (removed with the strip)
@@ -45,11 +46,12 @@ from in c5b7ed2 is in brackets.
 
 ## 2. New items from this pass (brief v2)
 
-20. **Privacy sentence now out of date, kept as written (brief v2, change 7).** The page no longer loads Google
-    Fonts: Geist and Geist Mono are self-hosted from `/assets/`. The privacy note still says, unchanged:
-    "This page loads fonts from Google Fonts, so Google receives your IP address when the page loads."
-    Marlon (and counsel) to decide the new wording; whoever edits it bumps `PRIVACY_NOTE_VERSION` in
-    `shared/serviceRequest.ts`.
+20. **Resolved (round r1d): Google Fonts sentence removed from the privacy note.** The page no longer loads
+    Google Fonts (Geist and Geist Mono are self-hosted from `/assets/`), so the note's sentence about it was
+    inaccurate. Marlon decided on card t1042s4066: "Remove the Google Fonts sentence from the privacy note."
+    The whole "This page." paragraph was removed from `PrivacyNote.tsx`; no other legal copy changed.
+    `PRIVACY_NOTE_VERSION` in `shared/serviceRequest.ts` was bumped from `2026-10-28.2` to `2026-11-04.1`,
+    as its comment requires for any wording edit.
 21. **Logo.** The "IB" monogram (indigo #4338CA square, white letters) in the favicon, apple-touch icon, nav,
     footer and OG image is temporary until Marlon supplies a logo file (SVG). The accent colour is Camila's
     indigo fallback; once a logo exists, the accent should come from it (DESIGN.md, one variable).

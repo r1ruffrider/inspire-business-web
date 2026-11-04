@@ -12,10 +12,6 @@ export function PrivacyNoteBody() {
   return (
     <div className="privacy__body">
       <p>
-        <strong>This page.</strong> This page loads fonts from Google Fonts, so Google receives
-        your IP address when the page loads.
-      </p>
-      <p>
         <strong>What the request form collects.</strong> What you type into the form: your name,
         email, phone (if you add one), business name, the services you choose, your project
         description, any links, timeline and how you heard about us. The email we receive also

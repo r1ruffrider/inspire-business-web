@@ -262,7 +262,7 @@ describe('email', () => {
 describe('privacy note version', () => {
   it('is exported for the page and is a dated, suffixed string', () => {
     assert.match(PRIVACY_NOTE_VERSION, /^[0-9]{4}-[0-9]{2}-[0-9]{2}([.][0-9]+)?$/)
-    assert.equal(PRIVACY_NOTE_VERSION, '2026-10-28.2')
+    assert.equal(PRIVACY_NOTE_VERSION, '2026-11-04.1')
   })
 })
 

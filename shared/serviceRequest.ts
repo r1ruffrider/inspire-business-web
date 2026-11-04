@@ -55,7 +55,7 @@ export const MAX_BODY_BYTES = 32 * 1024
  * exported here so the page can show the same value next to the note. MUST be bumped by whoever
  * edits the note wording (COPY.md section 4 / PrivacyNote.tsx). Any edit changes the suffix.
  */
-export const PRIVACY_NOTE_VERSION = '2026-10-28.2'
+export const PRIVACY_NOTE_VERSION = '2026-11-04.1'
 
 // ---------------------------------------------------------------------------
 // Types
