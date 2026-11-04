@@ -5,8 +5,9 @@ Written Wed Nov 4, 2026 (UTC+3) by Daniela on branch `feature/pro-refine-v2`, fr
 
 ## 1. The 18 TODOs that were visible on the preview, moved here verbatim
 
-These appeared on the page as dashed "TODO" chips (preview builds with `VITE_SHOW_TODOS=1`). Every chip and the
-`<Todo>` component are now removed from the code. Text is exactly as rendered ("TODO" + the note); where it came
+These appeared on the page as dashed "TODO" chips (preview builds with a show-TODOs env flag). Every chip and the
+`<Todo>` component are now removed from the code, and in round r1c the flag itself was removed from the
+boundary-check allowlist (a test now fails the build check if it reappears). Text is exactly as rendered ("TODO" + the note); where it came
 from in c5b7ed2 is in brackets.
 
 ### Hero proof strip (removed with the strip)

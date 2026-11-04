@@ -114,7 +114,7 @@ for (const file of scanTargets) {
 
 // 4. Only allowlisted VITE_* names may exist (a VITE_ prefix ships the value to the browser).
 //    Flags any other VITE_* name in .env.example and in source references under src/.
-const VITE_ALLOWLIST = new Set(['VITE_TURNSTILE_SITE_KEY', 'VITE_SHOW_TODOS'])
+const VITE_ALLOWLIST = new Set(['VITE_TURNSTILE_SITE_KEY'])
 const viteTargets = [...walk(join(root, 'src')), join(root, '.env.example')]
 for (const file of viteTargets) {
   let text = ''

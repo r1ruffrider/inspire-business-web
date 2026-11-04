@@ -58,9 +58,11 @@ describe('boundary check script', () => {
     assert.equal(run({ 'shared/a.ts': "import type { T } from './t.ts'\n" }).code, 1)
     assert.equal(run({ 'shared/a.ts': "import type { T } from './t.js'\n" }).code, 0)
   })
-  it('N8: only VITE_TURNSTILE_SITE_KEY and VITE_SHOW_TODOS are allowed, in src/ and .env.example', () => {
-    assert.equal(run({ 'src/a.ts': 'const k = import.meta.env.VITE_TURNSTILE_SITE_KEY + import.meta.env.VITE_SHOW_TODOS\n' }).code, 0)
-    assert.equal(run({ '.env.example': 'VITE_TURNSTILE_SITE_KEY=\nVITE_SHOW_TODOS=\n' }).code, 0)
+  it('N8: only VITE_TURNSTILE_SITE_KEY is allowed, in src/ and .env.example', () => {
+    assert.equal(run({ 'src/a.ts': 'const k = import.meta.env.VITE_TURNSTILE_SITE_KEY\n' }).code, 0)
+    assert.equal(run({ '.env.example': 'VITE_TURNSTILE_SITE_KEY=\n' }).code, 0)
+    // The retired TODO-chip flag must not come back.
+    assert.equal(run({ 'src/a.ts': 'const k = import.meta.env.VITE_' + 'SHOW_TODOS\n' }).code, 1)
     assert.equal(run({ 'src/a.ts': 'const k = import.meta.env.VITE_RESEND_API_KEY\n' }).code, 1)
     assert.equal(run({ 'src/a.ts': 'const k = import.meta.env.VITE_SECRET\n' }).code, 1)
     assert.equal(run({ '.env.example': 'VITE_API_TOKEN=\n' }).code, 1)
