@@ -3,7 +3,7 @@
  */
 export default function Mission() {
   return (
-    <blockquote className="section mission">
+    <blockquote className="mission">
       <div className="wrap">
         <p>The only thing between you and your dream is the technology in between. Let us build it.</p>
       </div>

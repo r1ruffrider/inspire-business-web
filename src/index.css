@@ -811,6 +811,8 @@ label.cons {
 ------------------------------------------------------------------- */
 .mission {
   margin: 0;
+  padding-block: clamp(28px, 3.5vw, 40px);
+  border-top: 1px solid var(--line);
   font-style: normal;
   quotes: none;
 }
@@ -901,6 +903,10 @@ label.cons {
 /* ------------------------------------------------------------------
    Meet the team: initials cards. Not controls, so no hover motion.
 ------------------------------------------------------------------- */
+/* First content under the nav, which already draws the hairline. */
+#team.section {
+  border-top: none;
+}
 #team > .wrap {
   display: grid;
 }

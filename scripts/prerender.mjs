@@ -1,7 +1,8 @@
 // Build step (after `vite build` and `vite build --ssr`): writes the rendered
-// page, the FAQPage JSON-LD (from the same data as the visible FAQ) and a
-// preload for the Latin text font into dist/index.html. No network access.
-import { readFileSync, readdirSync, rmSync, writeFileSync } from "node:fs"
+// homepage and /team into dist, plus the FAQPage JSON-LD (homepage only) and a
+// preload for the Latin text font. No network access. No client router: each
+// URL is its own HTML file, readable with JavaScript off.
+import { mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from "node:fs"
 import { join } from "node:path"
 import { fileURLToPath, pathToFileURL } from "node:url"
 import { createElement } from "react"
@@ -15,12 +16,13 @@ if (!entry) throw new Error("prerender: dist-ssr/prerender-entry.js missing")
 const { App, faq } = (await import(pathToFileURL(join(ssrDir, entry)).href)).default
 
 const htmlPath = join(dist, "index.html")
-let html = readFileSync(htmlPath, "utf8")
+const shell = readFileSync(htmlPath, "utf8")
 for (const marker of ["<!--app-html-->", "<!--faq-jsonld-->", "<!--font-preload-->"]) {
-  if (!html.includes(marker)) throw new Error(`prerender: marker ${marker} missing from dist/index.html`)
+  if (!shell.includes(marker)) throw new Error(`prerender: marker ${marker} missing from dist/index.html`)
 }
 
-const app = renderToString(createElement(App))
+const home = renderToString(createElement(App, { page: "home" }))
+const team = renderToString(createElement(App, { page: "team" }))
 const faqLd = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
@@ -34,12 +36,71 @@ const font = readdirSync(join(dist, "assets")).find((f) => /^geist-latin-wght-no
 const preload = font
   ? `<link rel="preload" href="/assets/${font}" as="font" type="font/woff2" crossorigin />`
   : ""
+const faqScript = `<script type="application/ld+json">${JSON.stringify(faqLd).replace(/</g, "\\u003c")}</script>`
 
-html = html
-  .replace("<!--app-html-->", () => app)
-  .replace("<!--faq-jsonld-->", () => `<script type="application/ld+json">${JSON.stringify(faqLd).replace(/</g, "\\u003c")}</script>`)
-  .replace("<!--font-preload-->", () => preload)
+function fill(appHtml, faqJson) {
+  return shell
+    .replace("<!--app-html-->", () => appHtml)
+    .replace("<!--faq-jsonld-->", () => faqJson)
+    .replace("<!--font-preload-->", () => preload)
+}
 
-writeFileSync(htmlPath, html)
+const homeHtml = fill(home, faqScript)
+let teamHtml = fill(team, "")
+const teamHead = [
+  [
+    "<title>Websites, Apps &amp; Brand Identity | Inspire Business Group</title>",
+    "<title>Meet the team | Inspire Business Group</title>",
+  ],
+  [
+    'content="Inspire Business Group designs and builds websites, apps and brand identity, including logo design, for small businesses across the US. Start with a free consultation."',
+    'content="The people who handle a project from the first request through launch. Inspire Business Group designs and builds websites, apps and brand identity for small businesses across the US."',
+  ],
+  [
+    '<link rel="canonical" href="https://www.inspirebusinesstechnology.com/" />',
+    '<link rel="canonical" href="https://www.inspirebusinesstechnology.com/team" />',
+  ],
+  [
+    '<meta property="og:url" content="https://www.inspirebusinesstechnology.com/" />',
+    '<meta property="og:url" content="https://www.inspirebusinesstechnology.com/team" />',
+  ],
+  [
+    '<meta property="og:title" content="Websites, apps and brand identity for small businesses" />',
+    '<meta property="og:title" content="Meet the team" />',
+  ],
+  [
+    '<meta name="twitter:title" content="Websites, apps and brand identity for small businesses" />',
+    '<meta name="twitter:title" content="Meet the team" />',
+  ],
+  [
+    'content="Web design, app development and brand identity (logo design and full brand identity) for small businesses across the US."',
+    'content="The people who handle a project from the first request through launch. Inspire Business Group designs and builds websites, apps and brand identity for small businesses across the US."',
+  ],
+]
+for (const [from, to] of teamHead) {
+  if (!teamHtml.includes(from)) throw new Error(`prerender: team head string missing: ${from.slice(0, 60)}`)
+  teamHtml = teamHtml.replaceAll(from, to)
+}
+
+if (homeHtml.includes('id="team"')) throw new Error("prerender: homepage still contains #team")
+if (!teamHtml.includes("Meet the team.")) throw new Error("prerender: /team missing the team heading")
+if (teamHtml.includes('id="products"') || teamHtml.includes('id="process"') || teamHtml.includes('id="faq"')) {
+  throw new Error("prerender: /team contains a homepage section")
+}
+if (!teamHtml.includes('href="/#request-services"')) throw new Error("prerender: /team CTA does not point at the homepage form")
+if (!teamHtml.includes("<h1 class=\"h2\" id=\"team-h\">")) throw new Error("prerender: /team heading is not an h1")
+if (!teamHtml.includes('content="Meet the team"')) throw new Error("prerender: og:title")
+if (teamHtml.includes("FAQPage") || teamHtml.includes('"@type":"Person"') || teamHtml.includes('"@type": "Person"')) {
+  throw new Error("prerender: /team has FAQ or Person schema")
+}
+if (!teamHtml.includes("<title>Meet the team | Inspire Business Group</title>")) {
+  throw new Error("prerender: /team title was not set")
+}
+
+writeFileSync(htmlPath, homeHtml)
+mkdirSync(join(dist, "team"), { recursive: true })
+writeFileSync(join(dist, "team", "index.html"), teamHtml)
 rmSync(ssrDir, { recursive: true, force: true })
-console.log(`prerender: ${app.length} chars of HTML, ${faq.length} FAQ entries, font preload ${font ? "added" : "skipped"}`)
+console.log(
+  `prerender: home ${home.length} chars, /team ${team.length} chars, ${faq.length} FAQ entries, font preload ${font ? "added" : "skipped"}`,
+)

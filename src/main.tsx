@@ -17,7 +17,14 @@ createRoot(document.getElementById("root")!).render(
 // focus its heading.
 if (window.location.hash.length > 1) {
   const hash = window.location.hash
-  const go = () => requestAnimationFrame(() => scrollToSection(hash, { updateHash: false }))
+  const go = () =>
+    requestAnimationFrame(() => {
+      if (hash === "#privacy-note") {
+        const note = document.getElementById("privacy-note")
+        if (note instanceof HTMLDetailsElement) note.open = true
+      }
+      scrollToSection(hash, { updateHash: false })
+    })
   if (document.readyState === "complete") go()
   else window.addEventListener("load", go, { once: true })
 }

@@ -3,6 +3,7 @@ import { Menu, X } from "lucide-react"
 import { Wordmark } from "@/components/Brand"
 import { RequestCta } from "@/components/ui/actions"
 import { content, EMAIL, navLinks } from "@/content"
+import { isSamePage, scrollSelector, type PageId } from "@/lib/page"
 import { scrollToSection } from "@/lib/scroll"
 
 /** Make the page interactive again NOW (not after React re-renders), so a focus call made
@@ -13,7 +14,7 @@ function releaseInert() {
   }
 }
 
-export default function Nav() {
+export default function Nav({ page }: { page: PageId }) {
   const [open, setOpen] = useState(false)
   const toggleRef = useRef<HTMLButtonElement>(null)
   const panelRef = useRef<HTMLElement>(null)
@@ -77,7 +78,10 @@ export default function Nav() {
       <div className="wrap">
         <div className="nav__bar">
           <Wordmark
+            href="/"
+            ariaLabel={page === "team" ? "Inspire Business Group, home" : "Inspire Business Group, back to top"}
             onClick={(e) => {
+              if (!isSamePage("/", page)) return
               e.preventDefault()
               go("#top")
             }}
@@ -88,9 +92,11 @@ export default function Nav() {
               <a
                 key={l.href}
                 href={l.href}
+                aria-current={page === "team" && l.href === "/team" ? "page" : undefined}
                 onClick={(e) => {
+                  if (!isSamePage(l.href, page)) return
                   e.preventDefault()
-                  go(l.href)
+                  go(scrollSelector(l.href))
                 }}
               >
                 {l.label}
@@ -121,9 +127,11 @@ export default function Nav() {
             <a
               key={l.href}
               href={l.href}
+              aria-current={page === "team" && l.href === "/team" ? "page" : undefined}
               onClick={(e) => {
+                if (!isSamePage(l.href, page)) return
                 e.preventDefault()
-                go(l.href)
+                go(scrollSelector(l.href))
               }}
             >
               {l.label}

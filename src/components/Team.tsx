@@ -14,9 +14,9 @@ export default function Team() {
       <div className="wrap">
         <div className="sec-head">
           <p className="mono-label">Team</p>
-          <h2 className="h2" id="team-h">
+          <h1 className="h2" id="team-h">
             Meet the team.
-          </h2>
+          </h1>
           <p className="lead">The people who handle a project from the first request through launch.</p>
         </div>
         <ul className="team">
@@ -24,9 +24,9 @@ export default function Team() {
             <li key={`${member.name}-${member.role}`}>
               <article className="member">
                 <MemberPhoto member={member} />
-                <h3 className={member.pending ? "member__name member__name--pending" : "member__name"} translate="no">
+                <h2 className={member.pending ? "member__name member__name--pending" : "member__name"} translate="no">
                   {member.name}
-                </h3>
+                </h2>
                 <p className="member__role">{member.role}</p>
                 <p className="member__bio">{member.bio}</p>
               </article>
@@ -34,7 +34,7 @@ export default function Team() {
           ))}
         </ul>
         <div className="team__cta">
-          <RequestCta variant="secondary" />
+          <RequestCta variant="secondary" href="/#request-services" />
         </div>
       </div>
     </section>

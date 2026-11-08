@@ -6,13 +6,14 @@ motion). This document explains them. Not shipped (`.vercelignore`).
 ## Direction
 "A studio's project sheet." Light, warm paper; ink type set tight; one indigo accent used as a field (the
 Process band, icon tiles, the first step) and for the one action; mono labels and numbers like a spec sheet.
-Nothing moves on scroll. The page is still and reads top to bottom: what we do, how a project runs, one mission
-line, what we build ourselves, the team, questions, then the request form.
+Nothing moves on scroll. The homepage reads top to bottom: what we do, how a project runs, one mission
+line, what we build ourselves, questions, then the request form. Meet the team is a separate page at /team.
 
-Order: Hero, Services, Process, mission pull-quote, Products we build ourselves, Meet the team, FAQ, Request services (final CTA + form), Footer.
+Order: Hero, Services, Process, mission pull-quote, Products we build ourselves, FAQ, Request services (final CTA + form), Footer.
+The /team page is the same header and footer, the team grid, and a Request services link back to /#request-services.
 Each band has its own shape: hero = copy + index card, Services = wide lead + list, Process = drawn flow on the
-tint, mission = one quiet pull-quote, Products = one compact strip, Team = a grid of initials cards, FAQ = heading + accordion, Request = sticky intro + form card, Footer = the one
-dark band.
+tint, mission = one quiet pull-quote (short padding, not a full section band), Products = one compact strip, FAQ = heading + accordion, Request = sticky intro + form card, Footer = the one
+dark band. The team grid uses the same cards on /team.
 
 ## Colour
 | Token | Value | Use | Contrast |

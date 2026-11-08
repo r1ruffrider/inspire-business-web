@@ -8,17 +8,17 @@ export const EMAIL = "info@inspirebusinesstechnology.com"
 export const LEGAL_NAME = "Inspire Business Group LLC"
 
 export const NAV_LINKS = [
-  { label: "Services", href: "#services" },
-  { label: "Process", href: "#process" },
-  { label: "Products", href: "#products" },
-  { label: "Team", href: "#team" },
-  { label: "FAQ", href: "#faq" },
+  { label: "Services", href: "/#services" },
+  { label: "Process", href: "/#process" },
+  { label: "Products", href: "/#products" },
+  { label: "Team", href: "/team" },
+  { label: "FAQ", href: "/#faq" },
 ] as const
 
-/** Nav and footer links. Drops Team when the roster is empty, so the anchor is never a dead end. */
+/** Nav and footer links. Drops Team when the roster is empty, so /team is never a dead end. */
 export function navLinks(teamCount: number) {
   if (teamCount > 0) return NAV_LINKS
-  return NAV_LINKS.filter((link) => link.href !== "#team")
+  return NAV_LINKS.filter((link) => link.href !== "/team")
 }
 
 export const DEFAULTS: SiteContent = {
