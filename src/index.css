@@ -540,6 +540,20 @@ label.cons {
 .hero__copy .lead {
   max-width: 52ch;
 }
+.hero__brand {
+  display: grid;
+  gap: 8px;
+}
+.hero__slogan {
+  margin: 0;
+  max-width: 28em;
+  font-size: var(--fs-lead);
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  text-wrap: balance;
+}
 .hero__cta {
   display: flex;
   flex-wrap: wrap;
@@ -793,6 +807,25 @@ label.cons {
 }
 
 /* ------------------------------------------------------------------
+   Mission pull-quote: quiet, between Process and Products. Not a heading.
+------------------------------------------------------------------- */
+.mission {
+  margin: 0;
+  font-style: normal;
+  quotes: none;
+}
+.mission p {
+  margin: 0;
+  max-width: 28em;
+  font-size: var(--fs-h3);
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  text-wrap: balance;
+}
+
+/* ------------------------------------------------------------------
    Products we build ourselves: compact neutral tiles
 ------------------------------------------------------------------- */
 .products {
@@ -863,6 +896,102 @@ label.cons {
   font-size: var(--fs-small);
   line-height: 1.55;
   color: var(--ink-muted);
+}
+
+/* ------------------------------------------------------------------
+   Meet the team: initials cards. Not controls, so no hover motion.
+------------------------------------------------------------------- */
+#team > .wrap {
+  display: grid;
+}
+.team {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
+  gap: var(--gutter);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+@media (min-width: 640px) {
+  .team {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (min-width: 1024px) {
+  .team {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+.team > li {
+  min-width: 0;
+}
+.member {
+  display: grid;
+  align-content: start;
+  min-width: 0;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-panel);
+  background: var(--surface);
+}
+.member__photo {
+  position: relative;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1 / 1;
+  margin-bottom: 16px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--r-control);
+  background: var(--bg);
+}
+.member__initials {
+  font-family: var(--font-sans);
+  font-size: 1.875rem;
+  font-weight: 650;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--ink-muted);
+}
+.member__photo img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  object-position: center top;
+}
+.member__name {
+  margin: 0 0 4px;
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  text-wrap: balance;
+  overflow-wrap: anywhere;
+}
+.member__name--pending {
+  color: var(--ink-muted);
+}
+.member__role {
+  margin: 0 0 8px;
+  font-size: var(--fs-small);
+  font-weight: 500;
+  line-height: 1.45;
+  color: var(--ink-muted);
+}
+.member__bio {
+  margin: 0;
+  font-size: var(--fs-body);
+  line-height: 1.6;
+  color: var(--ink-muted);
+}
+.team__cta {
+  justify-self: start;
+  margin-top: 40px;
 }
 
 /* ------------------------------------------------------------------

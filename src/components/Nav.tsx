@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react"
 import { Menu, X } from "lucide-react"
 import { Wordmark } from "@/components/Brand"
 import { RequestCta } from "@/components/ui/actions"
-import { EMAIL, NAV_LINKS } from "@/content"
+import { content, EMAIL, navLinks } from "@/content"
 import { scrollToSection } from "@/lib/scroll"
 
 /** Make the page interactive again NOW (not after React re-renders), so a focus call made
@@ -70,6 +70,8 @@ export default function Nav() {
     scrollToSection(href)
   }
 
+  const links = navLinks(content.team.length)
+
   return (
     <header className="nav">
       <div className="wrap">
@@ -82,7 +84,7 @@ export default function Nav() {
           />
 
           <nav className="nav__links" aria-label="Main">
-            {NAV_LINKS.map((l) => (
+            {links.map((l) => (
               <a
                 key={l.href}
                 href={l.href}
@@ -115,7 +117,7 @@ export default function Nav() {
 
       {open && (
         <nav className="menu" id="mobile-menu" ref={panelRef} aria-label="Main menu">
-          {NAV_LINKS.map((l) => (
+          {links.map((l) => (
             <a
               key={l.href}
               href={l.href}

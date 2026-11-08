@@ -11,4 +11,4 @@ export const isWorstCase: boolean =
   new URLSearchParams(window.location.search).get("data") === "worst"
 
 export const content: SiteContent = import.meta.env.DEV && isWorstCase ? worstCase() : DEFAULTS
-export { EMAIL, LEGAL_NAME, NAV_LINKS } from "./site"
+export { EMAIL, LEGAL_NAME, NAV_LINKS, navLinks } from "./site"

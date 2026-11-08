@@ -1,5 +1,5 @@
 import { Wordmark } from "@/components/Brand"
-import { content, EMAIL, LEGAL_NAME, NAV_LINKS } from "@/content"
+import { content, EMAIL, LEGAL_NAME, navLinks } from "@/content"
 import { scrollToSection } from "@/lib/scroll"
 
 /** Opens the privacy note and brings it into view. */
@@ -10,9 +10,8 @@ function openPrivacyNote() {
   scrollToSection("#privacy-note")
 }
 
-const EXPLORE = [...NAV_LINKS, { label: "Request services", href: "#request-services" }] as const
-
 export default function ContactFooter() {
+  const explore = [...navLinks(content.team.length), { label: "Request services", href: "#request-services" }]
   return (
     <footer id="footer" className="footer">
       <div className="wrap">
@@ -37,7 +36,7 @@ export default function ContactFooter() {
           <nav className="f-col f-col1" aria-label="Explore">
             <p className="mono-label">Explore</p>
             <ul>
-              {EXPLORE.map((l) => (
+              {explore.map((l) => (
                 <li key={l.href}>
                   <a
                     href={l.href}
@@ -59,8 +58,9 @@ export default function ContactFooter() {
               {content.products.map((p, i) => (
                 <li key={`${p.name}-${i}`}>
                   {p.url ? (
-                    <a href={p.url} rel="noopener" translate="no">
+                    <a href={p.url} target="_blank" rel="noopener noreferrer" translate="no">
                       {p.name}
+                      <span className="sr-only"> (opens in a new tab)</span>
                     </a>
                   ) : (
                     <span translate="no">{p.name}</span>
