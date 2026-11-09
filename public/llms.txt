@@ -47,14 +47,14 @@ The people who handle a project from the first request through launch.
 - Daniela Vargas, Web Designer: Designs and builds the pages and visual system customers see.
 - Natalia Ortega, Security Engineer: Finds what can be abused before a release ships.
 - Aria Chen, Cybersecurity Engineer: Reviews security posture and hardening.
-- Alexandra Chen, Cybersecurity Engineer: Bio to come.
+- Alexandra Chen, Cybersecurity Engineer: Assesses risk and guides security controls.
 - Elena Castillo, Quality Auditor: Inspects work before it ships and reports what passed, what failed, and what to fix.
 - Julieta Herrera, Privacy & Compliance Auditor: Checks numbers, privacy, and compliance before something goes public.
 - Isabella Navarro, Marketing Engineer: Shapes the offer so a first-time visitor understands it and knows what to do next.
 - Fernanda Ortiz, Social Media Engineer: Turns the story into posts that fit each channel.
 - Gabriela Mendoza, Research Engineer: Turns open questions into sourced findings before the team builds.
 - Bianca Morales, Administrative Assistant: Keeps scheduling, follow-ups, and project details in order.
-- Marisol Reyes, Audio / Video Engineer: Plans and produces product and explainer video.
+- Marisol Reyes, Audio / Video Engineer: Plans and produces product and explainer audio and video.
 
 ## FAQ
 

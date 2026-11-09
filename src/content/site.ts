@@ -135,9 +135,8 @@ export const DEFAULTS: SiteContent = {
       name: "Alexandra Chen",
       role: "Cybersecurity Engineer",
       initials: "AC",
-      bio: "Bio to come.", // awaits approved copy
+      bio: "Assesses risk and guides security controls.",
       image: "/team/alexandra-chen.webp",
-      bioPending: true,
     },
     {
       name: "Elena Castillo",
@@ -185,7 +184,7 @@ export const DEFAULTS: SiteContent = {
       name: "Marisol Reyes",
       role: "Audio / Video Engineer",
       initials: "MR",
-      bio: "Plans and produces product and explainer video.",
+      bio: "Plans and produces product and explainer audio and video.",
       image: "/team/marisol-reyes.webp",
     },
   ],

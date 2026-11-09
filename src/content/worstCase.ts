@@ -49,7 +49,7 @@ export function worstCase(): SiteContent {
       {
         name: "Marisol Reyes",
         role: "Audio / Video Engineer",
-        bio: "Plans and produces product and explainer video.",
+        bio: "Plans and produces product and explainer audio and video.",
         initials: "MR",
       },
     ],
