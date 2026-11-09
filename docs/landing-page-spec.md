@@ -20,7 +20,7 @@ Not shipped (`.vercelignore`). Tokens: DESIGN.md. Copy source: `src/content/site
 
 ## Work page
 
-`/work` is a prerendered unused-concept page (`dist/work/index.html`). H1 "Selected work". One KornX case: not a client, no results, no outbound KornX link. Eight watermarked renders in `public/work/kornx/`, shown with `object-fit: contain`. Closing Request services links to `/#request-services`.
+`/work` is a prerendered unused-concept page (`dist/work/index.html`). H1 "Selected work". One KornX case: not a client, no results, no outbound KornX link. Eight watermarked renders in `public/work/kornx/`, then three unused website concepts shown only as screenshots in `public/work/kornx/sites/`. `object-fit: contain`. No link to a concept HTML file. Closing Request services links to `/#request-services`.
 
 Mobile: on the homepage the sticky "Request services" bar appears after the hero button scrolls off and hides once the request section is in view. On `/team` it shows immediately and hides when the after-grid button comes into view. Hidden from 768 px. Safe-area padded.
 

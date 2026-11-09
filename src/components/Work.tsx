@@ -82,6 +82,12 @@ const SHOTS: Shot[] = [
   },
 ]
 
+const SITE_CONCEPTS = [
+  { n: 1, headline: "Every material has a next life." },
+  { n: 2, headline: "Waste transformed. Value recovered." },
+  { n: 3, headline: "Waste less. Recover more." },
+] as const
+
 /**
  * Unused KornX concept. Not a client project: no results, no endorsement, no outbound link.
  */
@@ -124,11 +130,72 @@ export default function Work() {
           </div>
         </article>
 
+        <WebsiteConcepts />
+
         <div className="work-close">
           <h2 className="h2">Want a brand like this for your business?</h2>
           <RequestCta />
         </div>
       </div>
+    </section>
+  )
+}
+
+function WebsiteConcepts() {
+  return (
+    <section className="work-sites" aria-labelledby="work-sites-h">
+      <h2 className="h2" id="work-sites-h">
+        Website concepts
+      </h2>
+      <p className="work-note">
+        Three homepage designs from the same unused KornX concept. Figures, names, and claims inside these
+        screenshots are placeholder concept content, not real results.
+      </p>
+      {SITE_CONCEPTS.map((concept) => (
+        <article className="site-concept" key={concept.n}>
+          <h3 className="h3">
+            Concept {concept.n}: “{concept.headline}”
+          </h3>
+          <p>
+            <span className="tag">Unused website concept</span>
+          </p>
+          <figure className="site-shot site-shot--hero">
+            <img
+              src={`/work/kornx/sites/kornx-site-${concept.n}-hero.webp`}
+              alt={`Unused KornX website concept ${concept.n}, homepage hero on desktop, headline “${concept.headline}”`}
+              width={1440}
+              height={900}
+              loading="lazy"
+              decoding="async"
+            />
+            <figcaption>Homepage hero, desktop</figcaption>
+          </figure>
+          <div className="site-shot-row">
+            <figure className="site-shot site-shot--mid">
+              <img
+                src={`/work/kornx/sites/kornx-site-${concept.n}-mid.webp`}
+                alt={`Unused KornX website concept ${concept.n}, mid-page section on desktop`}
+                width={1440}
+                height={900}
+                loading="lazy"
+                decoding="async"
+              />
+              <figcaption>Mid-page section, desktop</figcaption>
+            </figure>
+            <figure className="site-shot site-shot--phone">
+              <img
+                src={`/work/kornx/sites/kornx-site-${concept.n}-phone.webp`}
+                alt={`Unused KornX website concept ${concept.n}, homepage on a phone`}
+                width={780}
+                height={1688}
+                loading="lazy"
+                decoding="async"
+              />
+              <figcaption>Homepage hero, phone</figcaption>
+            </figure>
+          </div>
+        </article>
+      ))}
     </section>
   )
 }
