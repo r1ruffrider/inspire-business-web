@@ -67,90 +67,122 @@ export const DEFAULTS: SiteContent = {
     },
   ],
   // Working briefs only. Not employment, licenses, degrees, or locations.
+  // Photos are used only on /team. Placeholder role/bio strings await approved copy.
   team: [
+    {
+      name: "Marlon Gibson",
+      role: "Founder & CEO",
+      initials: "MG",
+      bio: "Bio to come.", // awaits approved copy
+      image: "/team/marlon-gibson.webp",
+      bioPending: true,
+    },
     {
       name: "Adriana Solano",
       role: "Chief of Operations",
       initials: "AS",
       bio: "Turns a request into a sequenced plan, assigns owners, and keeps the work moving through launch.",
+      image: "/team/adriana-solano.webp",
     },
     {
       name: "Catalina Moreno",
       role: "Software Architect",
       initials: "CM",
       bio: "Designs the system before production code is written, so the build has clear bounds.",
+      image: "/team/catalina-moreno.webp",
     },
     {
       name: "Valentina Cruz",
       role: "Coding Engineer",
       initials: "VC",
       bio: "Implements the backend, frontend, and database work the architecture calls for.",
+      image: "/team/valentina-cruz.webp",
     },
     {
       name: "Renata Vega",
       role: "Infrastructure / DevOps Engineer",
       initials: "RV",
       bio: "Makes builds, hosting, and launches repeatable.",
+      image: "/team/renata-vega.webp",
     },
     {
       name: "Camila Reyes",
       role: "UX Design Engineer",
       initials: "CR",
       bio: "Designs how the product should feel to use, from the first visit through handoff.",
+      image: "/team/camila-reyes.webp",
     },
     {
       name: "Daniela Vargas",
       role: "Web Designer",
       initials: "DV",
       bio: "Designs and builds the pages and visual system customers see.",
+      image: "/team/daniela-vargas.webp",
     },
     {
       name: "Natalia Ortega",
       role: "Security Engineer",
       initials: "NO",
       bio: "Finds what can be abused before a release ships.",
+      image: "/team/natalia-ortega.webp",
     },
     {
       name: "Aria Chen",
       role: "Cybersecurity Engineer",
       initials: "AC",
       bio: "Reviews security posture and hardening.",
+      image: "/team/aria-chen.webp",
     },
     {
       name: "Elena Castillo",
       role: "Quality Auditor",
       initials: "EC",
       bio: "Inspects work before it ships and reports what passed, what failed, and what to fix.",
+      image: "/team/elena-castillo.webp",
     },
     {
       name: "Julieta Herrera",
       role: "Privacy & Compliance Auditor",
       initials: "JH",
       bio: "Checks numbers, privacy, and compliance before something goes public.",
+      image: "/team/julieta-herrera.webp",
     },
     {
       name: "Isabella Navarro",
       role: "Marketing Engineer",
       initials: "IN",
       bio: "Shapes the offer so a first-time visitor understands it and knows what to do next.",
+      image: "/team/isabella-navarro.webp",
     },
     {
       name: "Fernanda Ortiz",
       role: "Social Media Engineer",
       initials: "FO",
       bio: "Turns the story into posts that fit each channel.",
+      image: "/team/fernanda-ortiz.webp",
     },
     {
       name: "Gabriela Mendoza",
       role: "Research Engineer",
       initials: "GM",
       bio: "Turns open questions into sourced findings before the team builds.",
+      image: "/team/gabriela-mendoza.webp",
     },
     {
       name: "Bianca Morales",
       role: "Administrative Assistant",
       initials: "BM",
       bio: "Keeps scheduling, follow-ups, and project details in order.",
+      image: "/team/bianca-morales.webp",
+    },
+    {
+      name: "Marisol Reyes",
+      role: "Role to come", // awaits approved copy
+      initials: "MR",
+      bio: "Bio to come.", // awaits approved copy
+      image: "/team/marisol-reyes.webp",
+      rolePending: true,
+      bioPending: true,
     },
     {
       name: "Name to come",

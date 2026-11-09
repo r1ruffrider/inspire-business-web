@@ -979,7 +979,9 @@ label.cons {
   text-wrap: balance;
   overflow-wrap: anywhere;
 }
-.member__name--pending {
+.member__name--pending,
+.member__role--pending,
+.member__bio--pending {
   color: var(--ink-muted);
 }
 .member__role {

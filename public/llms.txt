@@ -38,6 +38,7 @@ Page: https://www.inspirebusinesstechnology.com/team
 
 The people who handle a project from the first request through launch.
 
+- Marlon Gibson, Founder & CEO: Bio to come.
 - Adriana Solano, Chief of Operations: Turns a request into a sequenced plan, assigns owners, and keeps the work moving through launch.
 - Catalina Moreno, Software Architect: Designs the system before production code is written, so the build has clear bounds.
 - Valentina Cruz, Coding Engineer: Implements the backend, frontend, and database work the architecture calls for.
@@ -52,6 +53,7 @@ The people who handle a project from the first request through launch.
 - Fernanda Ortiz, Social Media Engineer: Turns the story into posts that fit each channel.
 - Gabriela Mendoza, Research Engineer: Turns open questions into sourced findings before the team builds.
 - Bianca Morales, Administrative Assistant: Keeps scheduling, follow-ups, and project details in order.
+- Marisol Reyes: Role to come. Bio to come.
 - Name to come, Video Engineer: Plans and produces product and explainer video.
 
 ## FAQ
