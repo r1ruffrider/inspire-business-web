@@ -16,7 +16,11 @@ Not shipped (`.vercelignore`). Tokens: DESIGN.md. Copy source: `src/content/site
 
 ## Team page
 
-`/team` is its own prerendered document (`dist/team/index.html`), not a homepage anchor. Same header and footer. "Meet the team." is the page `h1` (`.h2` size), then the lede, then the sentence "Our team is AI-powered: everyone on this page except our founder is an AI agent." 17 photo cards in `public/team/`. Marlon Gibson has no bio. Alexandra Chen's bio is "Assesses risk and guides security controls." Marisol Reyes is Audio / Video Engineer. Request services links to `/#request-services`. No services, process, products, FAQ, mission quote, or form on this page. Nav and footer use rooted hrefs (`/#services`, `/team`, `/#request-services`, wordmark `/`, privacy `/#privacy-note`).
+`/team` is its own prerendered document (`dist/team/index.html`), not a homepage anchor. Same header and footer. "Meet the team." is the page `h1` (`.h2` size), then the lede, then the sentence "Our team is AI-powered: everyone on this page except our founder is an AI agent." 17 photo cards in `public/team/`. Marlon Gibson has no bio. Alexandra Chen's bio is "Assesses risk and guides security controls." Marisol Reyes is Audio / Video Engineer. Request services links to `/#request-services`. No services, process, products, FAQ, mission quote, or form on this page. Nav and footer use rooted hrefs (`/#services`, `/work`, `/team`, `/#request-services`, wordmark `/`, privacy `/#privacy-note`).
+
+## Work page
+
+`/work` is a prerendered unused-concept page (`dist/work/index.html`). H1 "Selected work". One KornX case: not a client, no results, no outbound KornX link. Eight watermarked renders in `public/work/kornx/`, shown with `object-fit: contain`. Closing Request services links to `/#request-services`.
 
 Mobile: on the homepage the sticky "Request services" bar appears after the hero button scrolls off and hides once the request section is in view. On `/team` it shows immediately and hides when the after-grid button comes into view. Hidden from 768 px. Safe-area padded.
 

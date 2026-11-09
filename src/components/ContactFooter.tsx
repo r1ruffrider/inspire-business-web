@@ -1,6 +1,6 @@
 import { Wordmark } from "@/components/Brand"
 import { content, EMAIL, LEGAL_NAME, navLinks } from "@/content"
-import { isSamePage, scrollSelector, type PageId } from "@/lib/page"
+import { isSamePage, pageCurrent, scrollSelector, type PageId } from "@/lib/page"
 import { scrollToSection } from "@/lib/scroll"
 
 /** Opens the privacy note and brings it into view. */
@@ -24,7 +24,7 @@ export default function ContactFooter({ page }: { page: PageId }) {
           <div className="f-brand">
             <Wordmark
               href="/"
-              ariaLabel={page === "team" ? "Inspire Business Group, home" : "Inspire Business Group, back to top"}
+              ariaLabel={page === "home" ? "Inspire Business Group, back to top" : "Inspire Business Group, home"}
               onClick={(e) => {
                 if (!isSamePage("/", page)) return
                 e.preventDefault()
@@ -48,7 +48,7 @@ export default function ContactFooter({ page }: { page: PageId }) {
                 <li key={l.href}>
                   <a
                     href={l.href}
-                    aria-current={page === "team" && l.href === "/team" ? "page" : undefined}
+                    aria-current={pageCurrent(l.href, page)}
                     onClick={(e) => {
                       if (!isSamePage(l.href, page)) return
                       e.preventDefault()
