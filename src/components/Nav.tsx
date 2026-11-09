@@ -3,7 +3,7 @@ import { Menu, X } from "lucide-react"
 import { Wordmark } from "@/components/Brand"
 import { RequestCta } from "@/components/ui/actions"
 import { content, EMAIL, navLinks } from "@/content"
-import { isSamePage, scrollSelector, type PageId } from "@/lib/page"
+import { isSamePage, pageCurrent, scrollSelector, type PageId } from "@/lib/page"
 import { scrollToSection } from "@/lib/scroll"
 
 /** Make the page interactive again NOW (not after React re-renders), so a focus call made
@@ -79,7 +79,7 @@ export default function Nav({ page }: { page: PageId }) {
         <div className="nav__bar">
           <Wordmark
             href="/"
-            ariaLabel={page === "team" ? "Inspire Business Group, home" : "Inspire Business Group, back to top"}
+            ariaLabel={page === "home" ? "Inspire Business Group, back to top" : "Inspire Business Group, home"}
             onClick={(e) => {
               if (!isSamePage("/", page)) return
               e.preventDefault()
@@ -92,7 +92,7 @@ export default function Nav({ page }: { page: PageId }) {
               <a
                 key={l.href}
                 href={l.href}
-                aria-current={page === "team" && l.href === "/team" ? "page" : undefined}
+                aria-current={pageCurrent(l.href, page)}
                 onClick={(e) => {
                   if (!isSamePage(l.href, page)) return
                   e.preventDefault()
@@ -127,7 +127,7 @@ export default function Nav({ page }: { page: PageId }) {
             <a
               key={l.href}
               href={l.href}
-              aria-current={page === "team" && l.href === "/team" ? "page" : undefined}
+              aria-current={pageCurrent(l.href, page)}
               onClick={(e) => {
                 if (!isSamePage(l.href, page)) return
                 e.preventDefault()

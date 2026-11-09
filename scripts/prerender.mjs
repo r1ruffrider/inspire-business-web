@@ -23,6 +23,7 @@ for (const marker of ["<!--app-html-->", "<!--faq-jsonld-->", "<!--font-preload-
 
 const home = renderToString(createElement(App, { page: "home" }))
 const team = renderToString(createElement(App, { page: "team" }))
+const work = renderToString(createElement(App, { page: "work" }))
 const faqLd = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
@@ -97,10 +98,64 @@ if (!teamHtml.includes("<title>Meet the team | Inspire Business Group</title>"))
   throw new Error("prerender: /team title was not set")
 }
 
+let workHtml = fill(work, "")
+const workHead = [
+  [
+    "<title>Websites, Apps &amp; Brand Identity | Inspire Business Group</title>",
+    "<title>Selected work | Inspire Business Group</title>",
+  ],
+  [
+    'content="Inspire Business Group designs and builds websites, apps and brand identity, including logo design, for small businesses across the US. Start with a free consultation."',
+    'content="Unused concept: logo package, brand applications, and two homepage directions for a waste recovery company. KornX did not commission or use this design."',
+  ],
+  [
+    '<link rel="canonical" href="https://www.inspirebusinesstechnology.com/" />',
+    '<link rel="canonical" href="https://www.inspirebusinesstechnology.com/work" />',
+  ],
+  [
+    '<meta property="og:url" content="https://www.inspirebusinesstechnology.com/" />',
+    '<meta property="og:url" content="https://www.inspirebusinesstechnology.com/work" />',
+  ],
+  [
+    '<meta property="og:title" content="Websites, apps and brand identity for small businesses" />',
+    '<meta property="og:title" content="Selected work" />',
+  ],
+  [
+    '<meta name="twitter:title" content="Websites, apps and brand identity for small businesses" />',
+    '<meta name="twitter:title" content="Selected work" />',
+  ],
+  [
+    'content="Web design, app development and brand identity (logo design and full brand identity) for small businesses across the US."',
+    'content="Unused concept: logo package, brand applications, and two homepage directions for a waste recovery company. KornX did not commission or use this design."',
+  ],
+]
+for (const [from, to] of workHead) {
+  if (!workHtml.includes(from)) throw new Error(`prerender: work head string missing: ${from.slice(0, 60)}`)
+  workHtml = workHtml.replaceAll(from, to)
+}
+
+const workTitle = "KornX: brand identity and website concept for a waste recovery company (unused concept)"
+const workNote =
+  "Concept work by Marlon Gibson. KornX did not commission or use this design, and the KornX name belongs to its owner. Images are watermarked concept renders."
+if (!workHtml.includes(workTitle)) throw new Error("prerender: /work missing the case title")
+if (!workHtml.includes(workNote)) throw new Error("prerender: /work missing the concept note")
+if ((workHtml.match(/<img /g) || []).length !== 8) throw new Error("prerender: /work should have 8 images")
+if (workHtml.includes("FAQPage") || /https?:\/\/(?!www\.inspirebusinesstechnology\.com)[^"'\s]*kornx/i.test(workHtml)) {
+  throw new Error("prerender: /work has FAQ schema or a KornX link")
+}
+if (workHtml.includes('id="team"') || workHtml.includes('id="products"')) {
+  throw new Error("prerender: /work contains another page section")
+}
+if (!homeHtml.includes('href="/work"') || !teamHtml.includes('href="/work"') || !workHtml.includes('href="/work"')) {
+  throw new Error("prerender: Work link missing from a page")
+}
+
 writeFileSync(htmlPath, homeHtml)
 mkdirSync(join(dist, "team"), { recursive: true })
 writeFileSync(join(dist, "team", "index.html"), teamHtml)
+mkdirSync(join(dist, "work", "kornx"), { recursive: true })
+writeFileSync(join(dist, "work", "index.html"), workHtml)
 rmSync(ssrDir, { recursive: true, force: true })
 console.log(
-  `prerender: home ${home.length} chars, /team ${team.length} chars, ${faq.length} FAQ entries, font preload ${font ? "added" : "skipped"}`,
+  `prerender: home ${home.length} chars, /team ${team.length} chars, /work ${work.length} chars, ${faq.length} FAQ entries, font preload ${font ? "added" : "skipped"}`,
 )

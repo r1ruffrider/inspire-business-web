@@ -6,6 +6,7 @@ import Process from "@/components/Process"
 import Mission from "@/components/Mission"
 import ProductsSection from "@/components/ProductsSection"
 import Team from "@/components/Team"
+import Work from "@/components/Work"
 import Faq from "@/components/Faq"
 import RequestServices from "@/components/RequestServices"
 import ContactFooter from "@/components/ContactFooter"
@@ -64,6 +65,14 @@ function TeamPage() {
   )
 }
 
+function WorkPage() {
+  return (
+    <Chrome page="work">
+      <Work />
+    </Chrome>
+  )
+}
+
 function SendHome() {
   useEffect(() => {
     window.location.replace("/")
@@ -73,6 +82,7 @@ function SendHome() {
 
 export default function App({ page }: { page?: PageId }) {
   const route = page ?? detectPage()
+  if (route === "work") return <WorkPage />
   if (route === "team" && content.team.length === 0) return <SendHome />
   return route === "team" ? <TeamPage /> : <Home />
 }
