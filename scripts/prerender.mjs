@@ -139,7 +139,12 @@ const workNote =
   "Concept work by Marlon Gibson. KornX did not commission or use this design, and the KornX name belongs to its owner. Images are watermarked concept renders."
 if (!workHtml.includes(workTitle)) throw new Error("prerender: /work missing the case title")
 if (!workHtml.includes(workNote)) throw new Error("prerender: /work missing the concept note")
-if ((workHtml.match(/<img /g) || []).length !== 8) throw new Error("prerender: /work should have 8 images")
+if ((workHtml.match(/<img /g) || []).length !== 17) throw new Error("prerender: /work should have 17 images")
+if (!workHtml.includes("Website concepts")) throw new Error("prerender: /work missing Website concepts")
+if ((workHtml.match(/Unused website concept/g) || []).length !== 3) {
+  throw new Error("prerender: /work should label three unused website concepts")
+}
+if (/href="[^"]+\.html"/i.test(workHtml)) throw new Error("prerender: /work links to an html file")
 if (workHtml.includes("FAQPage") || /https?:\/\/(?!www\.inspirebusinesstechnology\.com)[^"'\s]*kornx/i.test(workHtml)) {
   throw new Error("prerender: /work has FAQ schema or a KornX link")
 }
