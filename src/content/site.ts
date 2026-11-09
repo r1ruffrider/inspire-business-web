@@ -73,9 +73,7 @@ export const DEFAULTS: SiteContent = {
       name: "Marlon Gibson",
       role: "Founder & CEO",
       initials: "MG",
-      bio: "Bio to come.", // awaits approved copy
       image: "/team/marlon-gibson.webp",
-      bioPending: true,
     },
     {
       name: "Adriana Solano",
@@ -134,6 +132,14 @@ export const DEFAULTS: SiteContent = {
       image: "/team/aria-chen.webp",
     },
     {
+      name: "Alexandra Chen",
+      role: "Cybersecurity Engineer",
+      initials: "AC",
+      bio: "Bio to come.", // awaits approved copy
+      image: "/team/alexandra-chen.webp",
+      bioPending: true,
+    },
+    {
       name: "Elena Castillo",
       role: "Quality Auditor",
       initials: "EC",
@@ -177,19 +183,10 @@ export const DEFAULTS: SiteContent = {
     },
     {
       name: "Marisol Reyes",
-      role: "Role to come", // awaits approved copy
+      role: "Audio / Video Engineer",
       initials: "MR",
-      bio: "Bio to come.", // awaits approved copy
-      image: "/team/marisol-reyes.webp",
-      rolePending: true,
-      bioPending: true,
-    },
-    {
-      name: "Name to come",
-      role: "Video Engineer",
-      initials: "VE",
       bio: "Plans and produces product and explainer video.",
-      pending: true,
+      image: "/team/marisol-reyes.webp",
     },
   ],
   faq: [

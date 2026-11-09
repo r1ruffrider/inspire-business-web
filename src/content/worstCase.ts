@@ -47,11 +47,10 @@ export function worstCase(): SiteContent {
       },
       { name: "A", role: "X", bio: "Short.", initials: "A" },
       {
-        name: "Name to come",
-        role: "Video Engineer",
+        name: "Marisol Reyes",
+        role: "Audio / Video Engineer",
         bio: "Plans and produces product and explainer video.",
-        initials: "VE",
-        pending: true,
+        initials: "MR",
       },
     ],
     faq: [

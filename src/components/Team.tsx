@@ -18,6 +18,9 @@ export default function Team() {
             Meet the team.
           </h1>
           <p className="lead">The people who handle a project from the first request through launch.</p>
+          <p className="team__disclosure">
+            Our team is AI-powered: everyone on this page except our founder is an AI agent.
+          </p>
         </div>
         <ul className="team">
           {team.map((member, index) => (
@@ -28,7 +31,9 @@ export default function Team() {
                   {member.name}
                 </h2>
                 <p className={member.rolePending ? "member__role member__role--pending" : "member__role"}>{member.role}</p>
-                <p className={member.bioPending ? "member__bio member__bio--pending" : "member__bio"}>{member.bio}</p>
+                {member.bio ? (
+                  <p className={member.bioPending ? "member__bio member__bio--pending" : "member__bio"}>{member.bio}</p>
+                ) : null}
               </article>
             </li>
           ))}

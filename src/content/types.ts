@@ -30,8 +30,8 @@ export interface Product {
 export interface TeamMember {
   name: string
   role: string
-  /** One working brief. Not a credential, employer, or location. */
-  bio: string
+  /** One working brief. Omitted when no approved bio exists. */
+  bio?: string
   /** Stored explicitly so placeholders such as VE stay deliberate. */
   initials: string
   /** Optional portrait. Missing means the initials tile stays. */
