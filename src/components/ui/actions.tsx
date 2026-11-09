@@ -1,6 +1,7 @@
 import type { ReactNode } from "react"
 import { ArrowDown, ArrowRight } from "lucide-react"
 import { Button, type ButtonProps } from "@/components/ui/button"
+import { detectPage, isSamePage, scrollSelector } from "@/lib/page"
 import { scrollToSection } from "@/lib/scroll"
 
 // Event the form listens for to preselect a service when a service's
@@ -19,6 +20,7 @@ export function RequestCta({
   className,
   id,
   tabIndex,
+  href = "/#request-services",
 }: {
   variant?: ButtonProps["variant"]
   size?: ButtonProps["size"]
@@ -32,21 +34,24 @@ export function RequestCta({
   className?: string
   id?: string
   tabIndex?: number
+  /** Rooted homepage form URL. Same-page clicks scroll; cross-page clicks navigate. */
+  href?: string
 }) {
   return (
     <Button asChild variant={variant} size={size} block={block} className={className}>
       <a
         id={id}
         tabIndex={tabIndex}
-        href="#request-services"
+        href={href}
         aria-label={ariaLabel}
         onClick={(e) => {
+          if (!isSamePage(href, detectPage())) return
           e.preventDefault()
           onActivate?.()
           if (service) {
             window.dispatchEvent(new CustomEvent(PRESELECT_EVENT, { detail: { service } }))
           }
-          scrollToSection("#request-services")
+          scrollToSection(scrollSelector(href))
         }}
       >
         {label}

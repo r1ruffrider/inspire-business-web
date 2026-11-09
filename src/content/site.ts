@@ -8,11 +8,18 @@ export const EMAIL = "info@inspirebusinesstechnology.com"
 export const LEGAL_NAME = "Inspire Business Group LLC"
 
 export const NAV_LINKS = [
-  { label: "Services", href: "#services" },
-  { label: "Process", href: "#process" },
-  { label: "Products", href: "#products" },
-  { label: "FAQ", href: "#faq" },
+  { label: "Services", href: "/#services" },
+  { label: "Process", href: "/#process" },
+  { label: "Products", href: "/#products" },
+  { label: "Team", href: "/team" },
+  { label: "FAQ", href: "/#faq" },
 ] as const
+
+/** Nav and footer links. Drops Team when the roster is empty, so /team is never a dead end. */
+export function navLinks(teamCount: number) {
+  if (teamCount > 0) return NAV_LINKS
+  return NAV_LINKS.filter((link) => link.href !== "/team")
+}
 
 export const DEFAULTS: SiteContent = {
   services: [
@@ -55,7 +62,102 @@ export const DEFAULTS: SiteContent = {
     },
     {
       name: "Smart Home Certification",
-      line: "Certifies homes by their level of smart-technology integration.",
+      line: "A framework for certifying homes by their level of smart-technology integration.",
+      url: "https://atomshott.com/",
+    },
+  ],
+  // Working briefs only. Not employment, licenses, degrees, or locations.
+  team: [
+    {
+      name: "Adriana Solano",
+      role: "Chief of Operations",
+      initials: "AS",
+      bio: "Turns a request into a sequenced plan, assigns owners, and keeps the work moving through launch.",
+    },
+    {
+      name: "Catalina Moreno",
+      role: "Software Architect",
+      initials: "CM",
+      bio: "Designs the system before production code is written, so the build has clear bounds.",
+    },
+    {
+      name: "Valentina Cruz",
+      role: "Coding Engineer",
+      initials: "VC",
+      bio: "Implements the backend, frontend, and database work the architecture calls for.",
+    },
+    {
+      name: "Renata Vega",
+      role: "Infrastructure / DevOps Engineer",
+      initials: "RV",
+      bio: "Makes builds, hosting, and launches repeatable.",
+    },
+    {
+      name: "Camila Reyes",
+      role: "UX Design Engineer",
+      initials: "CR",
+      bio: "Designs how the product should feel to use, from the first visit through handoff.",
+    },
+    {
+      name: "Daniela Vargas",
+      role: "Web Designer",
+      initials: "DV",
+      bio: "Designs and builds the pages and visual system customers see.",
+    },
+    {
+      name: "Natalia Ortega",
+      role: "Security Engineer",
+      initials: "NO",
+      bio: "Finds what can be abused before a release ships.",
+    },
+    {
+      name: "Aria Chen",
+      role: "Cybersecurity Engineer",
+      initials: "AC",
+      bio: "Reviews security posture and hardening.",
+    },
+    {
+      name: "Elena Castillo",
+      role: "Quality Auditor",
+      initials: "EC",
+      bio: "Inspects work before it ships and reports what passed, what failed, and what to fix.",
+    },
+    {
+      name: "Julieta Herrera",
+      role: "Privacy & Compliance Auditor",
+      initials: "JH",
+      bio: "Checks numbers, privacy, and compliance before something goes public.",
+    },
+    {
+      name: "Isabella Navarro",
+      role: "Marketing Engineer",
+      initials: "IN",
+      bio: "Shapes the offer so a first-time visitor understands it and knows what to do next.",
+    },
+    {
+      name: "Fernanda Ortiz",
+      role: "Social Media Engineer",
+      initials: "FO",
+      bio: "Turns the story into posts that fit each channel.",
+    },
+    {
+      name: "Gabriela Mendoza",
+      role: "Research Engineer",
+      initials: "GM",
+      bio: "Turns open questions into sourced findings before the team builds.",
+    },
+    {
+      name: "Bianca Morales",
+      role: "Administrative Assistant",
+      initials: "BM",
+      bio: "Keeps scheduling, follow-ups, and project details in order.",
+    },
+    {
+      name: "Name to come",
+      role: "Video Engineer",
+      initials: "VE",
+      bio: "Plans and produces product and explainer video.",
+      pending: true,
     },
   ],
   faq: [

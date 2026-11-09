@@ -23,9 +23,10 @@ export default function ProductsSection() {
             <li className="product" key={`${p.name}-${i}`}>
               <h3 className="product__name" translate="no">
                 {p.url ? (
-                  <a href={p.url} rel="noopener">
+                  <a href={p.url} target="_blank" rel="noopener noreferrer">
                     {p.name}
                     <ArrowUpRight aria-hidden="true" />
+                    <span className="sr-only"> (opens in a new tab)</span>
                   </a>
                 ) : (
                   p.name

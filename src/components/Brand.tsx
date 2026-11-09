@@ -21,9 +21,17 @@ export function Monogram({ className }: { className?: string }) {
   )
 }
 
-export function Wordmark({ onClick, href = "#top" }: { onClick?: (e: MouseEvent<HTMLAnchorElement>) => void; href?: string }) {
+export function Wordmark({
+  onClick,
+  href = "/",
+  ariaLabel = "Inspire Business Group, back to top",
+}: {
+  onClick?: (e: MouseEvent<HTMLAnchorElement>) => void
+  href?: string
+  ariaLabel?: string
+}) {
   return (
-    <a href={href} className="wordmark" translate="no" aria-label="Inspire Business Group, back to top" onClick={onClick}>
+    <a href={href} className="wordmark" translate="no" aria-label={ariaLabel} onClick={onClick}>
       <Monogram className="wordmark__mark" />
       <span className="wordmark__text">
         <span>Inspire</span> <span>Business Group</span>

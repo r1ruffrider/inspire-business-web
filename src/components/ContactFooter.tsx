@@ -1,5 +1,6 @@
 import { Wordmark } from "@/components/Brand"
-import { content, EMAIL, LEGAL_NAME, NAV_LINKS } from "@/content"
+import { content, EMAIL, LEGAL_NAME, navLinks } from "@/content"
+import { isSamePage, scrollSelector, type PageId } from "@/lib/page"
 import { scrollToSection } from "@/lib/scroll"
 
 /** Opens the privacy note and brings it into view. */
@@ -10,16 +11,22 @@ function openPrivacyNote() {
   scrollToSection("#privacy-note")
 }
 
-const EXPLORE = [...NAV_LINKS, { label: "Request services", href: "#request-services" }] as const
-
-export default function ContactFooter() {
+export default function ContactFooter({ page }: { page: PageId }) {
+  const explore = [
+    ...navLinks(content.team.length),
+    { label: "Request services", href: "/#request-services" },
+  ]
+  const privacyHref = "/#privacy-note"
   return (
     <footer id="footer" className="footer">
       <div className="wrap">
         <div className="footer__grid">
           <div className="f-brand">
             <Wordmark
+              href="/"
+              ariaLabel={page === "team" ? "Inspire Business Group, home" : "Inspire Business Group, back to top"}
               onClick={(e) => {
+                if (!isSamePage("/", page)) return
                 e.preventDefault()
                 scrollToSection("#top")
               }}
@@ -37,13 +44,15 @@ export default function ContactFooter() {
           <nav className="f-col f-col1" aria-label="Explore">
             <p className="mono-label">Explore</p>
             <ul>
-              {EXPLORE.map((l) => (
+              {explore.map((l) => (
                 <li key={l.href}>
                   <a
                     href={l.href}
+                    aria-current={page === "team" && l.href === "/team" ? "page" : undefined}
                     onClick={(e) => {
+                      if (!isSamePage(l.href, page)) return
                       e.preventDefault()
-                      scrollToSection(l.href)
+                      scrollToSection(scrollSelector(l.href))
                     }}
                   >
                     {l.label}
@@ -59,8 +68,9 @@ export default function ContactFooter() {
               {content.products.map((p, i) => (
                 <li key={`${p.name}-${i}`}>
                   {p.url ? (
-                    <a href={p.url} rel="noopener" translate="no">
+                    <a href={p.url} target="_blank" rel="noopener noreferrer" translate="no">
                       {p.name}
+                      <span className="sr-only"> (opens in a new tab)</span>
                     </a>
                   ) : (
                     <span translate="no">{p.name}</span>
@@ -76,8 +86,9 @@ export default function ContactFooter() {
             © {new Date().getFullYear()} {LEGAL_NAME}. All rights reserved.
           </span>
           <a
-            href="#privacy-note"
+            href={privacyHref}
             onClick={(e) => {
+              if (!isSamePage(privacyHref, page)) return
               e.preventDefault()
               openPrivacyNote()
             }}

@@ -27,6 +27,19 @@ export interface Product {
   url?: string
 }
 
+export interface TeamMember {
+  name: string
+  role: string
+  /** One working brief. Not a credential, employer, or location. */
+  bio: string
+  /** Stored explicitly so placeholders such as VE stay deliberate. */
+  initials: string
+  /** Optional portrait. Missing means the initials tile stays. */
+  image?: string
+  /** Pending name slot (card 15). Renders the name in muted ink. */
+  pending?: boolean
+}
+
 export interface FaqItem {
   q: string
   a: string
@@ -36,5 +49,6 @@ export interface SiteContent {
   services: ServiceItem[]
   process: ProcessStep[]
   products: Product[]
+  team: TeamMember[]
   faq: FaqItem[]
 }

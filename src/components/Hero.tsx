@@ -13,13 +13,17 @@ export default function Hero() {
     <section id="top" className="hero" aria-labelledby="h1">
       <div className="wrap hero__grid">
         <div className="hero__copy">
-          <p className="eyebrow">Inspire Business Group</p>
+          <div className="hero__brand">
+            <p className="eyebrow">Inspire Business Group</p>
+            <p className="hero__slogan">You envision it. We build it.</p>
+          </div>
           <h1 className="h-display" id="h1" tabIndex={-1}>
             Websites, apps and brand identity for small businesses.
           </h1>
           <p className="lead">
-            We design and build the website, app and brand your customers see first, for small
-            businesses across the US. Tell us what you need, and we start with a free consultation.
+            We turn that into the website, app and brand your customers see first, for small
+            businesses across the US. Tell us what you have in mind, and we start with a free
+            consultation.
           </p>
           <div className="hero__cta">
             <RequestCta block="phone" id="hero-cta" />

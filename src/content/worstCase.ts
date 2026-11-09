@@ -38,6 +38,22 @@ export function worstCase(): SiteContent {
       { name: "Fourth product", line: "One line." },
       { name: "Fifth product", line: "One line." },
     ],
+    team: [
+      {
+        name: LONG,
+        role: "Infrastructure / DevOps Engineer and a role name that has to wrap twice",
+        bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. ".repeat(6),
+        initials: "LN",
+      },
+      { name: "A", role: "X", bio: "Short.", initials: "A" },
+      {
+        name: "Name to come",
+        role: "Video Engineer",
+        bio: "Plans and produces product and explainer video.",
+        initials: "VE",
+        pending: true,
+      },
+    ],
     faq: [
       { q: LONG + "?", a: "Lorem ipsum dolor sit amet. ".repeat(20) },
       { q: "Short?", a: "Yes." },
