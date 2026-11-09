@@ -18,17 +18,22 @@ export default function Team() {
             Meet the team.
           </h1>
           <p className="lead">The people who handle a project from the first request through launch.</p>
+          <p className="team__disclosure">
+            Our team is AI-powered: everyone on this page except our founder is an AI agent.
+          </p>
         </div>
         <ul className="team">
-          {team.map((member) => (
+          {team.map((member, index) => (
             <li key={`${member.name}-${member.role}`}>
               <article className="member">
-                <MemberPhoto member={member} />
+                <MemberPhoto member={member} eager={index < 3} priority={index === 0} />
                 <h2 className={member.pending ? "member__name member__name--pending" : "member__name"} translate="no">
                   {member.name}
                 </h2>
-                <p className="member__role">{member.role}</p>
-                <p className="member__bio">{member.bio}</p>
+                <p className={member.rolePending ? "member__role member__role--pending" : "member__role"}>{member.role}</p>
+                {member.bio ? (
+                  <p className={member.bioPending ? "member__bio member__bio--pending" : "member__bio"}>{member.bio}</p>
+                ) : null}
               </article>
             </li>
           ))}
@@ -41,7 +46,12 @@ export default function Team() {
   )
 }
 
-function MemberPhoto({ member }: { member: TeamMember }) {
+function headshotAlt(member: TeamMember): string {
+  if (member.rolePending) return `Headshot of ${member.name}`
+  return `Headshot of ${member.name}, ${member.role}`
+}
+
+function MemberPhoto({ member, eager, priority }: { member: TeamMember; eager: boolean; priority: boolean }) {
   return (
     <div className="member__photo">
       <span className="member__initials" aria-hidden="true">
@@ -50,11 +60,12 @@ function MemberPhoto({ member }: { member: TeamMember }) {
       {member.image ? (
         <img
           src={member.image}
-          alt={`${member.name}, ${member.role}`}
-          width={800}
-          height={800}
-          loading="lazy"
+          alt={headshotAlt(member)}
+          width={600}
+          height={600}
+          loading={eager ? "eager" : "lazy"}
           decoding="async"
+          fetchPriority={priority ? "high" : undefined}
           onError={(e) => {
             e.currentTarget.hidden = true
           }}

@@ -30,14 +30,18 @@ export interface Product {
 export interface TeamMember {
   name: string
   role: string
-  /** One working brief. Not a credential, employer, or location. */
-  bio: string
+  /** One working brief. Omitted when no approved bio exists. */
+  bio?: string
   /** Stored explicitly so placeholders such as VE stay deliberate. */
   initials: string
   /** Optional portrait. Missing means the initials tile stays. */
   image?: string
-  /** Pending name slot (card 15). Renders the name in muted ink. */
+  /** Pending name slot. Renders the name in muted ink. */
   pending?: boolean
+  /** Role text is a placeholder awaiting approved copy. */
+  rolePending?: boolean
+  /** Bio text is a placeholder awaiting approved copy. */
+  bioPending?: boolean
 }
 
 export interface FaqItem {
